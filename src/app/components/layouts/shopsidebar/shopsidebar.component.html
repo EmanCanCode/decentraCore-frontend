@@ -1,0 +1,25 @@
+<div class="sidebar">
+  <!-- Property Type Filter Widget -->
+  <div class="widget socail-widget mb-40">
+    <h5 class="widget-title">Property Type</h5>
+    <div class="filter-color">
+      <form>
+        <label class="checkbox" *ngFor="let propertyType of propertyTypes">
+          <input
+            type="checkbox"
+            [checked]="selectedFilters.includes(propertyType.name)"
+            (change)="onCheckboxChange($event, propertyType.name)" />
+          <span class="custom-box"></span>
+          {{propertyType.name}}
+        </label>
+      </form>
+    </div>
+  </div>
+  <!-- Instagram Feeds Widget (unchanged) -->
+  <div class="widget instagram-feed-widget mb-40">
+    <h5 class="widget-title">Instagram Feeds</h5>
+    <ul>
+      <li *ngFor="let instafeed of instafeeds"><img src="{{instafeed.img}}" alt="Image"></li>
+    </ul>
+  </div>
+</div>

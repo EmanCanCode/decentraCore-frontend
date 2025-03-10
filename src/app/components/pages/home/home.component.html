@@ -1,0 +1,213 @@
+<app-header></app-header>
+<!-- <app-newsletter></app-newsletter> -->
+<!--====== BANNER PART START ======-->
+<section class="banner-area banner-style-one position-relative">
+  <app-cursor></app-cursor>
+    <!-- Follow Circle -->
+    <div class="d-none d-md-block vertical-text wow fadeIn" data-wow-delay=".3s">
+        <ul>
+            <li>
+                <a href="#"> <i class="fab fa-facebook"></i> Facebook </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
+            </li>
+        </ul>
+    </div>
+    <div class="container container-custom-two">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6">
+                <div class="banner-content">
+                    <span class="promo-tag wow fadeInDown" data-wow-delay=".3s">DecentraCore: An Advanced Blockchain Portfolio</span>
+                    <h1 class="title wow fadeInLeft" data-wow-delay=".5s">Expert <br>Web3 Engineering</h1>
+                    <ul>
+                        <li>
+                            <a class="main-btn btn-filled wow fadeInUp" data-wow-delay=".7s" routerLink='/about'>About</a>
+                        </li>
+                        <li>
+                            <a class="main-btn btn-border wow fadeInUp" data-wow-delay=".9s" href="#latest-projects">View Demos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="0.5s">
+                <div class="banner-thumb d-none d-md-block">
+                    <ngx-slick-carousel class="carousel hero-slider-one" #slickModal="slick-carousel" [config]="heroSliderConfig">
+                        <div ngxSlickItem class="single-thumb" *ngFor="let bannerPost of bannerPosts">
+                            <img src="{{bannerPost.img}}" alt="images">
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== BANNER PART ENDS ======-->
+<!--====== Category START ======-->
+<div class="categories-box-layout">
+    <div class="container">
+        <div class="categories-box-layout-inner">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6" *ngFor="let categoryPost of categoryPosts">
+                    <a routerLink='/shop-left' class="categories-box">
+                        <span class="icon">
+                            <i class="{{categoryPost.icon}}"></i>
+                        </span>
+                        <h5 class="title">{{categoryPost.title}}</h5>
+                        <p>{{categoryPost.numberOfYears}}+ Years</p>
+                        <span class="overlay-icon">
+                            <i class="{{categoryPost.icon}}"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--====== Category EN ======-->
+<!--====== ABOUT PART START ======-->
+<app-habout></app-habout>
+<!--====== ABOUT PART END ======-->
+<section class="pt-115 pb-115 container-wide restaurant-tab-area position-relative">
+    <img src="{{texture}}" alt="texture" class="texture-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="block-text">
+                    <div class="section-title mb-20">
+                        <span class="title-tag">Skills</span>
+                        <h2>Areas of Proven Expertise</h2>
+                    </div>
+                    <p class="pr-50">
+                      Over the years, I've developed secure, scalable blockchain systems that integrate finance, supply chain, and real estate. I blend robust NodeJS backends, innovative smart contracts, containerized microservices, and dynamic Angular frontends to transform complex challenges into real-world applications.
+                    </p>
+                </div>
+            </div>
+            <div class="px-2 w-100">
+                <ngx-slick-carousel class="row wide-shop-post-slider mt-80" #slickModal="slick-carousel" [config]="wideSliderConfig">
+
+                    <div ngxSlickItem class="col-12" *ngFor="let skill of skills" >
+                        <div class="food-box shop-box" >
+                            <div class="thumb">
+                                <img src="{{skill.img}}" alt="images">
+                            </div>
+                            <div class="desc">
+                                <h4>
+                                    <a href="#" (click)="$event.preventDefault()">{{skill.title}}</a>
+                                </h4>
+                                <span class="skills">{{skill.yearsOfExp}} <span>years</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== SERVICE PART START ======-->
+<section id="latest-projects" class="service-sec bg-black pt-115 pb-85">
+    <div class="container">
+        <div class="section-title text-center mb-50">
+            <div class="section-title-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 512 512" xml:space="preserve" class="">
+                    <path d="M369.853,250.251l-100-241C267.53,3.65,262.062,0,255.999,0s-11.531,3.65-13.854,9.251l-100,241    c-1.527,3.681-1.527,7.817,0,11.498l100,241c2.323,5.601,7.791,9.251,13.854,9.251s11.531-3.65,13.854-9.251l100-241    C371.381,258.068,371.381,253.932,369.853,250.251z M255.999,457.861L172.239,256l83.76-201.861L339.759,256L255.999,457.861z" fill="#ffffff" />
+                    <path class="diamond-spark spark-1" d="M139.606,118.393l-63-63c-5.858-5.857-15.356-5.857-21.213,0c-5.858,5.858-5.858,15.356,0,21.213l63,63    c2.928,2.929,6.767,4.394,10.606,4.394s7.678-1.465,10.607-4.394C145.465,133.748,145.465,124.25,139.606,118.393z" fill="#ffffff" />
+                    <path class="diamond-spark spark-2" d="M456.607,55.393c-5.858-5.857-15.356-5.857-21.213,0l-63,63c-5.858,5.858-5.858,15.356,0,21.213    c2.928,2.929,6.767,4.394,10.606,4.394s7.678-1.465,10.607-4.394l63-63C462.465,70.748,462.465,61.25,456.607,55.393z" fill="#ffffff" />
+                    <path class="diamond-spark spark-3" d="M139.606,372.393c-5.858-5.857-15.356-5.857-21.213,0l-63,63c-5.858,5.858-5.858,15.356,0,21.213    C58.322,459.535,62.16,461,65.999,461s7.678-1.465,10.607-4.394l63-63C145.465,387.748,145.465,378.25,139.606,372.393z" fill="#ffffff" />
+                    <path class="diamond-spark spark-4" d="M456.607,435.393l-63-63c-5.858-5.857-15.356-5.857-21.213,0c-5.858,5.858-5.858,15.356,0,21.213l63,63    c2.928,2.929,6.767,4.394,10.606,4.394s7.678-1.465,10.607-4.394C462.465,450.748,462.465,441.25,456.607,435.393z" fill="#ffffff" />
+                </svg>
+            </div>
+            <span class="title-tag"> Latest Ecosystem</span>
+            <h2>Projects</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6" *ngFor="let project of latestProjects">
+                <div class="service-wrapper mb-30">
+                    <div class="image-box">
+                        <a href="#">
+                            <img src="{{project.img}}" alt="img">
+                        </a>
+                    </div>
+                    <div class="service-content text-center">
+                        <div class="icon">
+                            <i class="{{project.icon}}"></i>
+                        </div>
+                        <h3>
+                            <a href="#" (click)="$event.preventDefault()">{{project.title}}</a>
+                        </h3>
+                        <p>{{project.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== SERVICE PART END ======-->
+<!--====== TEXT BLOCK START ======-->
+<section class="text-block   with-pattern pt-115 pb-115">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-10 order-2 order-lg-1">
+                <div class="block-text">
+                    <div class="section-title mb-20">
+                        <span class="title-tag">design video</span>
+                        <h2>Make Your Day Brighter .</h2>
+                    </div>
+                    <p class="pr-50">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat you have to understand
+                        this.
+                    </p>
+                    <a routerLink='/contact' class="main-btn btn-filled mt-40">See More</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-10 order-1 order-lg-2 wow fadeInRight" data-wow-delay=".3s">
+                <div class="video-wrap video-wrap-two mb-small" style="background-image: url({{videoimg}});">
+                    <a href="http://www.youtube.com/embed/watch?v=EEJFMdfraVY" data-fancybox="gallery" class="popup-video"><i class="fas fa-play"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pattern-wrap">
+        <div class="pattern"></div>
+    </div>
+</section>
+<!--====== TEXT BLOCK END ======-->
+<!--====== LATEST NEWS START ======-->
+<section class="pt-115 pb-115 blog-style-2">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-8 col-sm-7">
+                <div class="section-title">
+                    <span class="title-tag">Blog</span>
+                    <h2>News Feeds</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-5 d-none d-sm-block">
+                <div class="latest-post-arrow arrow-style text-right">
+                    <div class="slick-arrow prev-arrow"><i class="fal fa-arrow-left"></i></div>
+                    <div class="slick-arrow next-arrow"><i class="fal fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <!-- Blog post loop -->
+        <ngx-slick-carousel class="row no-gutters latest-post-slider mt-80" #slickModal="slick-carousel" [config]="latestPostSliderConfig">
+            <div ngxSlickItem class="col-lg-12" *ngFor="let post of blogPosts">
+                <article class="blog-post" style="background-image: url({{post.img}});">
+                    <div class="blog-data">
+                        <div class="post-date">
+                            {{post.postdate}}
+                        </div>
+                        <h3 class="post-title"><a href="#">{{post.title}}</a></h3>
+                        <a routerLink='/blog-detail' class="post-link"><span>{{post.linktext}}</span></a>
+                    </div>
+                    <a routerLink='/blog-detail'></a>
+                </article>
+            </div>
+        </ngx-slick-carousel>
+    </div>
+</section>
+<!--====== LATEST NEWS END ======-->
+<app-footer></app-footer>

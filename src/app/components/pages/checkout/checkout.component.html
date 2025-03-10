@@ -1,0 +1,149 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== SHOP SECTION START ======-->
+<section class="checkout pt-120 pb-120">
+    <div class="container">
+        <form method="post">
+            <div class="row">
+                <div class="col-xl-7">
+                    <div class="checkout-form">
+                        <h4>Billing Details</h4>
+                        <div class="row">
+                            <div class="col-xl-6 input-group input-group-two mb-20">
+                                <label>First Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" placeholder="First name" name="fname">
+                            </div>
+                            <div class="col-xl-6 input-group input-group-two mb-20">
+                                <label>Last Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" placeholder="Last name" name="lname">
+                            </div>
+                            <div class="col-12 input-group input-group-two mb-20">
+                                <label>Company Name
+                                </label>
+                                <input type="text" placeholder="Company Name (Optional)" name="cname">
+                            </div>
+                            <div class="col-12 input-group input-group-two mb-20">
+                                <label>Country
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select nice-select>
+                                    <option value selected="">Select A Country</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="France">France</option>
+                                    <option value="UAE">United Arab Emirates</option>
+                                </select>
+                            </div>
+                            <div class="col-12 input-group input-group-two mb-20">
+                                <label>Address
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" placeholder="Your Address" name="address" required="">
+                            </div>
+                            <div class="col-12 input-group input-group-two mb-20">
+                                <label>City
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" placeholder="City" name="city" required="">
+                            </div>
+                            <div class="col-xl-6 input-group input-group-two mb-20">
+                                <label>Last Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" placeholder="Phone Number" name="number" required="">
+                            </div>
+                            <div class="col-xl-6 input-group input-group-two mb-20">
+                                <label>Email Address
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" placeholder="Your Email" name="lname" required="">
+                            </div>
+                            <div class="col-12 input-group input-group-two">
+                                <label>Your Messsage
+                                </label>
+                                <textarea placeholder="Type Your Message" name="comment" rows="7"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 space-top">
+                    <div class="checkout-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let checkouttable of checkouttableposts'>
+                                    <td data-title="product">
+                                        <div class="product-name">
+                                            <h6>
+                                                <a href="#">{{checkouttable.title}}</a>
+                                            </h6>
+                                            <p>{{checkouttable.piece}} Piece</p>
+                                        </div>
+                                    </td>
+                                    <td data-title="Quantity">x{{checkouttable.qty}}</td>
+                                    <td data-title="Total">
+                                        <strong>{{checkouttable.total}}$</strong>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <td>
+                                        <h6 class="mb-0">Total</h6>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <strong>115.79$</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 input-group input-group-two mb-20">
+                            <label>Card Number
+                            </label>
+                            <input type="text" placeholder="Card Number" name="Card" required="">
+                        </div>
+                        <div class="col-12 input-group input-group-two mb-20">
+                            <label>Full Name
+                            </label>
+                            <input type="text" placeholder="Full name" name="full-name" required="">
+                        </div>
+                        <div class="col-xl-6 input-group input-group-two mb-20">
+                            <label>Expiry Date
+                            </label>
+                            <input type="text" placeholder="Expiry Date (MM/YY)" name="exp-date" required="">
+                        </div>
+                        <div class="col-xl-6 input-group input-group-two mb-20">
+                            <label>CVV*
+                            </label>
+                            <input type="text" placeholder="CVV" name="CVV-no" required="">
+                        </div>
+                        <div class="col-12">
+                            <p class="small mb-20">
+                                Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our
+                                <a href="#">Privacy Policy</a>
+                            </p>
+                            <button type="submit" class="main-btn btn-filled w-100">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!--====== SHOP SECTION END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>

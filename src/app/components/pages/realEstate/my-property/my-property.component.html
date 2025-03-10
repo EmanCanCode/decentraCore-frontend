@@ -1,0 +1,154 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== SHOP SECTION START ======-->
+<section class="Shop-section pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5" *ngIf="lifecycle && lifecycle.state !== 'noProperty'">
+                <div class="shop-detail-image">
+                    <ngx-slick-carousel class="detail-slider-1" #slickModal="slick-carousel" [config]="detailsliderConfig" *ngIf="bigSliderPost.length">
+                        <div ngxSlickItem class="slide-item" *ngFor="let bigslider of bigSliderPost">
+                            <div class="image-box">
+                                <a href="#" (click)="$event.preventDefault()">
+                                    <img src="{{bigslider}}" class="img-fluid" alt="img">
+                                </a>
+                                <div class="badges">
+                                  <span class="skills">{{metadata.attributes.Bedrooms}} <i class="fas fa-bed"></i></span>
+                                  <span class="skills discounted">{{metadata.attributes.Bathrooms}} <i class="fas fa-bath"></i></span>
+                              </div>
+
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                    <ngx-slick-carousel class="detail-slider-2" #slickModal="slick-carousel" [config]="detailslidertwoConfig" *ngIf="smallSliderPost.length">
+                        <div ngxSlickItem class="slide-item" *ngFor="let smallSlider of smallSliderPost">
+                            <div class="image-box">
+                                <img src="{{smallSlider}}" class="img-fluid" alt="img">
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+            </div>
+            <div class="col-lg-7" *ngIf="lifecycle && lifecycle.state !== 'noProperty'">
+                <div class="shop-detail-content">
+                    <h3 class="product-title mb-20">{{metadata.name}}</h3>
+                    <div class="desc mb-20 pb-20 border-bottom">
+                        <span class="skills"><i class="fab fa-ethereum"></i>&nbsp;{{price}}</span>
+                    </div>
+
+                    <div class="short-descr mb-20">
+                        <p>{{metadata.description}}</p>
+                    </div>
+                    <div class="color-sec mb-20">
+                        <label>Attributes</label>
+                        <div class="color-box">
+                            <label class="m-0">
+                              <input type="radio" name="attribute">
+                              <span class="choose-material">{{metadata.attributes.Location}}</span>
+                            </label>
+                            <label class="m-0">
+                                <input type="radio" name="attribute">
+                                <span class="choose-material">{{metadata.attributes.SquareFeet}} sqft</span>
+                            </label>
+                            <label class="m-0">
+                                <input type="radio" name="attribute">
+                                <span class="choose-material">Built in {{metadata.attributes.YearBuilt}}</span>
+                            </label>
+
+                            <label class="m-0">
+                                <input type="radio" name="attribute">
+                                <span class="choose-material">{{metadata.attributes['Property Type']}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="quantity-cart d-block d-sm-flex">
+                        <div class="cart-btn pl-0">
+                            <a
+                              href="javascript:void(0)"
+                              class="main-btn btn-border"
+                              (click)="$event.preventDefault()"
+                              *ngIf="lifecycle && lifecycle.state === 'inFinanceContract'"
+                            >
+                              Pay Off
+                            </a>
+                            <a
+                              href="javascript:void(0)"
+                              class="main-btn btn-border"
+                              (click)="$event.preventDefault()"
+                              *ngIf="
+                                lifecycle &&
+                                lifecycle.state === 'inFinanceContract' &&
+                                lifecycle.escrowLifeCycleState &&
+                                lifecycle.escrowLifeCycleState === 'Earnest Deposited'
+                              "
+                            >
+                              Finalize Sale
+                            </a>
+                             <a
+                              href="javascript:void(0)"
+                              class="main-btn btn-border"
+                              (click)="$event.preventDefault()"
+                              *ngIf="
+                                lifecycle &&
+                                lifecycle.state === 'inFinanceContract' &&
+                                lifecycle.escrowLifeCycleState &&
+                                lifecycle.escrowLifeCycleState === 'No Earnest Deposited'
+                              "
+                            >
+                              Deposit Earnest
+                            </a>
+                        </div>
+                    </div>
+                    <div class="other-info flex mt-20">
+                        <h6>Tags:</h6>
+                        <ul>
+                            <li class="list-inline-item mr-2">
+                                <a href="javascript:void(0)" (click)="$event.preventDefault()" class="grey">eman</a>
+                            </li>
+                            <li class="list-inline-item mr-2">
+                                <a href="javascript:void(0)" (click)="$event.preventDefault()" class="grey">can</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript:void(0)" (click)="$event.preventDefault()" class="grey">code</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="product-description mt-100">
+                    <div class="tabs">
+                        <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center">
+                            <li ngbNavItem> <a ngbNavLink>Notice</a>
+                              <ng-template ngbNavContent>
+                                <p *ngIf="lifecycle && lifecycle.state !== 'noProperty'; else noProperty">
+                                  <strong>Disclaimer:</strong> The properties displayed here are part of a
+                                  <em>playground blockchain demonstration</em>. They do not represent actual real-world
+                                  real estate transactions. No genuine purchase or sale of property is occurring,
+                                  and no legal rights, titles, or ownership interests in real estate are conferred.
+                                  By viewing or interacting with this content, you acknowledge and agree that this
+                                  is a purely fictional, non-binding simulation of how property transactions could
+                                  be modeled on a blockchain.
+                                  <br><br>
+                                  For any real-world property purchase, consult licensed real estate professionals
+                                  and comply with all applicable laws and regulations.
+                                </p>
+                                <ng-template #noProperty>
+                                  <p class="text-center">
+                                    You have not started an escrow process yet. Please visit our
+                                    <a routerLink="/realEstate/shop">Real Estate Shop</a> to purchase a property.
+                                  </p>
+                                </ng-template>
+                              </ng-template>
+                            </li>
+                        </ul>
+                        <div [ngbNavOutlet]="nav"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== SHOP SECTION END ======-->
+<app-footerthree></app-footerthree>

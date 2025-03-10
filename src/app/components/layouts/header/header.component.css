@@ -1,0 +1,23 @@
+.nav-menu {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.navbar-close {
+  flex-shrink: 0 !important; /* Prevent shrinking */
+}
+
+.sigma-header-nav {
+  flex-grow: 1 !important; /* Takes all remaining space */
+}
+
+.sigma-header-nav-inner {
+  display: flex !important;
+  justify-content: flex-end !important; /* Align content to the right */
+}
+
+.sigma-main-menu {
+  display: flex !important;
+  gap: 20px !important; /* Optional: Add space between menu items */
+}

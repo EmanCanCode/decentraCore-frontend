@@ -1,0 +1,11 @@
+<div class="instagram-feed-section">
+    <div class="container-fluid p-0">
+        <ngx-slick-carousel class="instagram-slider" #slickModal="slick-carousel" [config]="instagramsliderConfig">
+            <div ngxSlickItem class="image" *ngFor="let instapost of instaposts">
+                <a href="{{instapost.img}}" class="insta-popup">
+                    <img src="{{instapost.img}}" alt="instagram-feed">
+                </a>
+            </div>
+        </ngx-slick-carousel>
+    </div>
+</div>

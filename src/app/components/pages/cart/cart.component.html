@@ -1,0 +1,100 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== SHOP SECTION START ======-->
+<section class="cart-section pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="w-100 table-responsive mb-60">
+                    <table class="table cw-cart-table mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th scope="col" class="product-name">Product</th>
+                                <th scope="col" class="product-qty">Quantity</th>
+                                <th scope="col" class="product-price">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cartlist of cartlistpost">
+                                <td class="product-remove text-center cw-align">
+                                    <a href="#"><i class="fas fa-times"></i></a>
+                                </td>
+                                <td data-title="Product" class="has-title">
+                                    <div class="product-thumbnail">
+                                        <img src="{{cartlist.img}}" alt="product_thumbnail">
+                                    </div>
+                                    <a routerLink='/shop-detail'>{{cartlist.title}}</a>
+                                </td>
+                                <td class="quantity shop-detail-content cw-qty-sec cw-align has-title" data-title="Quantity">
+                                    <div class="quantity-box">
+                                        <button type="button" class="minus-btn" (click)="decrement(cartlist)">
+                                            <i class="fal fa-minus"></i>
+                                        </button>
+                                        <input type="text" class="input-qty" name="name" value="{{cartlist.qty}}">
+                                        <button type="button" class="plus-btn" (click)="increment(cartlist)">
+                                            <i class="fal fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="product-price text-white cw-align has-title" data-title="Price">
+                                    <span class="product-currency"><b>$</b></span> <span class="product-amount"><b>{{cartlist.total}}</b></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <button class="main-btn btn-filled float-left">Continue Shoping</button>
+                                    <button class="main-btn btn-filled float-right">Update Cart</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 mb-60">
+                        <div class="cw-product-promo">
+                            <div class="cw-title">
+                                <h5>Discount Code</h5>
+                            </div>
+                            <form>
+                                <div class="form-group mb-0">
+                                    <label for="couponCode">Enter coupon code</label>
+                                    <input type="text" class="form-control" placeholder="Coupon Code" id="couponCode">
+                                    <button type="submit" class="main-btn btn-filled mt-4">Apply</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="offset-lg-6 col-lg-6 col-md-12">
+                        <div class="cw-product-promo">
+                            <table class="table cw-table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Subtotal</b> </td>
+                                        <td class="text-right">$ 99.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Shipping</b> </td>
+                                        <td class="text-right">$ 2.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Total</b> </td>
+                                        <td class="text-right">$ 103.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a routerLink='/checkout' class="main-btn btn-filled w-100">Proceed to Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== SHOP SECTION END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>

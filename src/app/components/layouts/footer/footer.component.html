@@ -1,0 +1,160 @@
+<footer class="sigma-footer">
+    <div class="sigma-footer-top">
+        <div class="container-fluid">
+            <div class="row no-gutters">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!--====== Back to top ======-->
+                            <div class="sigma-backto-top">
+                                <a href="#" class="back-to-top" id="backToTop" *ngIf="isShow" (click)="gotoTop()" (window:scroll)="ScrolltoTop()">
+                                    <i class="fal fa-chevron-up"></i> Back to Top
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="h-100 d-flex align-items-center justify-content-end">
+                                <select nice-select>
+                                    <option>English</option>
+                                    <option>Español</option>
+                                </select>
+                                <select nice-select>
+                                    <option>USD</option>
+                                    <option>GBP</option>
+                                    <option>INR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--====== Footer content ======-->
+                    <div class="sigma-footer-box">
+                        <div class="sigma-footer-box-top">
+                            <div class="ft-logo">
+                                <a routerLink='/'>
+                                    <img src="{{ logo }}" alt="Logo">
+                                </a>
+                            </div>
+                            <ul class="ft-social-media">
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sigma-footer-nav">
+                            <ul class="ft-nav">
+                                <li class="menu-item">
+                                    <a routerLink='/'>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a routerLink='/about'>
+                                        About Us
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a routerLink='/blog-grid'>
+                                        News
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a routerLink='/gallery'>
+                                        Gallery
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a routerLink='/contact'>
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-maps" id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sigma-footer-bottom">
+        <div class="container-fluid">
+            <div class="sigma-footer-bottom-inner">
+                <div class="row no-gutters align-items-end">
+                    <div class="col-lg-6">
+                        <div class="sigma-footer-contact">
+                            <ul>
+                                <li>
+                                    <i class="flaticon-phone"></i>
+                                    <a href="tel:"><span>Phone Number</span> +987 876 765 76 577</a>
+                                </li>
+                                <li>
+                                    <i class="flaticon-message"></i>
+                                    <a href="mailto:"><span>Email Address</span> info@webmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="sigma-footer-search">
+                            <form>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button><i class="fal fa-search"></i></button>
+                                    </div>
+                                    <input type="text" name="#" class="form-control" placeholder="Search...">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="sigma-footer-contact style-2">
+                            <ul>
+                                <li>
+                                    <i class="flaticon-location-pin"></i>
+                                    <a href="#"><span>Office Address</span> 14/A, Miranda City, NYC</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright -->
+    <div class="sigma-copyright">
+        <div class="container-fluid">
+            <div class="sigma-copyright-inner">
+                <div class="row">
+                    <div class="col-lg-6 col-md-5 order-2 order-md-1">
+                        <p class="sigma-copyright-text">Copyright By@<a href="#">Example</a> - 2020</p>
+                    </div>
+                    <div class="col-lg-6 col-md-7 order-1 order-md-2">
+                        <div class="sigma-copyright-menu">
+                            <ul>
+                                <li>
+                                    <a href="#">Terms of use</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Environmental Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

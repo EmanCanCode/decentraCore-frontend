@@ -1,0 +1,12 @@
+/* This targets the <a> inside .desc h6 */
+.desc h6 a {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2; /* Number of lines you want to display */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2em;     /* Adjust line-height as desired */
+  max-height: 2.4em;      /* line-height * number of lines */
+  white-space: normal;    /* Needed so multi-line can wrap */
+}

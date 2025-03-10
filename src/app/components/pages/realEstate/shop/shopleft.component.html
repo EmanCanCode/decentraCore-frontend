@@ -1,0 +1,52 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== SHOP SECTION START ======-->
+<section class="Shop-section pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Shop Sidebar -->
+            <div class="col-lg-4 col-md-10 col-sm-10">
+                <app-shopsidebar (filterChanged)="handleFilterChange($event)"></app-shopsidebar>
+            </div>
+            <div class="col-lg-8 col-md-10">
+                <div class="shop-products-wrapper">
+                    <div class="shop-product-top">
+                        <p>Showing 9 of 9 results</p>
+                        <div class="sorting-box">
+                            <select name="guests" id="guests" nice-select (change)="sortProperties($event.target.value)">
+                                <option value="1" disabled selected>Default Sorting</option>
+                                <option value="2">Price: Low to High</option>
+                                <option value="3">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="product-wrapper restaurant-tab-area">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6" *ngFor="let displayedProperty of displayedProperties">
+                                <div class="food-box shop-box">
+                                    <div class="thumb">
+                                        <img src="{{displayedProperty.image}}" alt="images">
+                                        <div class="badges">
+                                            <span class="skills">{{displayedProperty.attributes.Bedrooms}} <i class="fas fa-bed"></i></span>
+                                            <span class="skills discounted">{{displayedProperty.attributes.Bathrooms}} <i class="fas fa-bath"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <h6>
+                                            <a [routerLink]="['/realEstate/view', displayedProperty.id]">{{displayedProperty.description}}</a>
+                                        </h6>
+                                        <br>
+                                        <span class="skills"><i class="fab fa-ethereum">&nbsp;</i>{{displayedProperty.price}}</span>
+                                        <a [routerLink]="['/realEstate/view', displayedProperty.id]" class="link"><i class="fal fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== SHOP SECTION END ======-->
+<app-footerthree></app-footerthree>

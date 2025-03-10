@@ -1,0 +1,169 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== Account SECTION START ======-->
+<section class="account-sec pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="account-tabs">
+                    <ul ngbNav #nav="ngbNav" class="nav flex-column nav-tabs border-0" role="tablist">
+                        <li ngbNavItem>
+                            <a ngbNavLink>Dashboard</a>
+                            <ng-template ngbNavContent>
+                                <div class="dashboard-content">
+                                    <p class="text-white mb-30">Hello <b>John Benjamin</b> (not <b>John Benjamin</b>?
+                                        <a href="#">Log Out</a>)
+                                    </p>
+                                    <p class="text-white">From Your Account Dashboard You can View Your <a href="#">Recent Orders</a>, Manage Your<a href="#">Shipping and Billing Addresses</a> and <a href="#">Edit Your Password and Account Details</a></p>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>Orders</a>
+                            <ng-template ngbNavContent>
+                                <div class="content-heading mb-50">
+                                    <h3>My Orders</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                </div>
+                                <div class="order-table">
+                                    <table class="table cw-cart-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col" class="product-name">My Order</th>
+                                                <th scope="col" class="product-qty">Order ID</th>
+                                                <th scope="col" class="product-price">Order Date</th>
+                                                <th scope="col" class="product-price">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let orderlist of orderlists">
+                                                <td class="product-remove text-center cw-align">
+                                                    <a href="#"><i class="fas fa-times"></i></a>
+                                                </td>
+                                                <td data-title="Product" class="has-title">
+                                                    <div class="product-thumbnail">
+                                                        <img src="{{orderlist.img}}" alt="product_thumbnail">
+                                                    </div>
+                                                    <a routerLink='/shop-detail'>{{orderlist.title}}</a>
+                                                </td>
+                                                <td class="product-price text-white cw-align has-title" data-title="Order ID">#{{orderlist.id}}</td>
+                                                <td class="product-price text-white cw-align has-title" data-title="Order Date">{{orderlist.date}}</td>
+                                                <td data-title="Actions" class="has-title">
+                                                    <a href="#" class="main-btn btn-filled">Order Now</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>Downloads</a>
+                            <ng-template ngbNavContent>
+                                <div class="content-heading download-content">
+                                    <h3>You Haven't Downloaded Any Product</h3>
+                                    <p>You still havent saved any products yet, Go back to the products page and check some of your favorite products</p>
+                                    <a routerLink='/shop-left' class="main-btn btn-outline mt-20">Browse Products</a>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>Addresses</a>
+                            <ng-template ngbNavContent>
+                                <div class="address-content">
+                                    <p class="mb-30">The Following Address will Be Used on Checkout Page by Default</p>
+                                    <div class="extra-info mb-30">
+                                        <div class="billing-info">
+                                            <h3>Billing Address</h3>
+                                            <p>John Benjamin</p>
+                                        </div>
+                                        <a href="#" class="btn-link">Edit</a>
+                                    </div>
+                                    <div class="extra-info">
+                                        <div class="shipping-info">
+                                            <h3>Shipping Address</h3>
+                                            <p>You have not Setup this Type of Address Yet.</p>
+                                        </div>
+                                        <a href="#" class="btn-link">Add</a>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>Account Details</a>
+                            <ng-template ngbNavContent>
+                                <div class="profile-content">
+                                    <div class="content-heading mb-50">
+                                        <h3>Welcome Back</h3>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                    </div>
+                                    <form method="post">
+                                        <div class="row">
+                                            <div class="col-lg-6 input-group input-group-two mb-20">
+                                                <label>First Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" placeholder="John" name="fname">
+                                            </div>
+                                            <div class="col-lg-6 input-group input-group-two mb-20">
+                                                <label>Last Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" placeholder="Benjamin" name="lname">
+                                            </div>
+                                            <div class="col-12 input-group input-group-two mb-20">
+                                                <label>Display Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" placeholder="John Benjamin" name="dname">
+                                                <p class="mt-2">This is how your Name will be Displayed in the Account Section and Reviews..</p>
+                                            </div>
+                                            <div class="col-12 input-group input-group-two mb-20">
+                                                <label>Email Address
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" placeholder="abc@email.com" name="email">
+                                            </div>
+                                            <div class="col-12 input-group input-group-two mb-20">
+                                                <label>Current Password(Leave Blank to Leave Unchanged)
+                                                </label>
+                                                <input type="text" placeholder="Current Password" name="c-password">
+                                            </div>
+                                            <div class="col-12 input-group input-group-two mb-20">
+                                                <label>New Password(Leave Blank to Leave Unchanged)
+                                                </label>
+                                                <input type="text" placeholder="New Password" name="n-password">
+                                            </div>
+                                            <div class="col-12 input-group input-group-two mb-20">
+                                                <label>Confirm New Password
+                                                </label>
+                                                <input type="text" placeholder="Confirm Password" name="c-password">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="main-btn btn-filled">Save Changes</button>
+                                    </form>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a routerLink='/' class="nav-link logout">
+                                <i class="fal fa-power-off"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content">
+                    <div [ngbNavOutlet]="nav"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== Account SECTION END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>

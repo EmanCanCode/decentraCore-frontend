@@ -1,0 +1,23 @@
+.badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.badges .skills {
+  font-weight: 500;
+  padding: 2px 15px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  background-color: #4da6ff;
+  color: #fff;
+  position: static;
+  display: block;
+}
+
+.badges .skills.discounted {
+  background-color: #fff;
+  font-size: 16px;
+
+  padding: 2px 15px;
+  color: #1c1b19;
+}

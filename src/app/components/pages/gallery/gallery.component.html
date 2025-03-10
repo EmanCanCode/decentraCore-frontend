@@ -1,0 +1,19 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== GALLERY START ======-->
+<div class="gallery-wrappper pt-120 pb-120">
+    <div class="container">
+        <div class="gallery-loop">
+            <div class="single-gallery-image wow fadeInUp" data-wow-delay="{{gallerypost.animationtime}}" *ngFor="let gallerypost of galleryposts">
+                <a href="{{gallerypost.img}}" class="popup-image">
+                    <img src="{{gallerypost.img}}" alt="Images">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--====== GALLERY END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>

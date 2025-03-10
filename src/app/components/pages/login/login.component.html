@@ -1,0 +1,55 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== LOGIN SECTION START ======-->
+<section class="login-sec pt-120 pb-120">
+    <div class="container">
+        <div class="account-wrapper">
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <div class="login-content" style="background-image: url('{{loginbg}}');">
+                        <div class="description text-center">
+                            <h2>Welcome Back!</h2>
+                            <p class="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login-form">
+                        <h2>Log in</h2>
+                        <form method="post">
+                            <div class="input-group input-group-two mb-20">
+                                <input type="text" placeholder="Username" name="username">
+                            </div>
+                            <div class="input-group input-group-two mb-30">
+                                <input type="password" placeholder="Password" name="username">
+                            </div>
+                            <a href="#">Forgot Password?</a>
+                            <button type="submit" class="main-btn btn-filled mt-20 login-btn">Login</button>
+                            <div class="form-seperator">
+                                <span>OR</span>
+                            </div>
+                            <div class="social-buttons">
+                                <button type="button" class="main-btn btn-border facebook mb-20">
+                                    <i class="fab fa-facebook-f"></i>
+                                    Continue with Facebook
+                                </button>
+                                <button type="button" class="main-btn btn-filled mb-30">
+                                    <i class="fab fa-google"></i>
+                                    Continue with Google
+                                </button>
+                            </div>
+                            <p>Don't have an Account?
+                                <a routerLink='/register' class="d-inline-block">Create One</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== LOGIN SECTION END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>

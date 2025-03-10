@@ -1,0 +1,97 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== LEGAL PART START ======-->
+<section class="faq-section pt-115 pb-115">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="faq-wrapper">
+                    <div class="faq-title mb-30">
+                        <h3>Before Purchase</h3>
+                    </div>
+                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="mb-60">
+                        <ngb-panel title="Collapsible Group Item #1">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Collapsible Group Item #2">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Collapsible Group Item #3">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                    <div class="faq-title mb-30 mt-5">
+                        <h3>After Purchase</h3>
+                    </div>
+                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="mb-40">
+                        <ngb-panel title="Collapsible Group Item #1">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Collapsible Group Item #2">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Collapsible Group Item #3">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar mb-0">
+                    <!-- Search Widget -->
+                    <div class="widget search-widget mb-40">
+                        <h5 class="widget-title">Search Objects</h5>
+                        <form action="#">
+                            <input type="text" placeholder="Search your keyword...">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </form>
+                    </div>
+                    <!-- Popular Post Widget -->
+                    <div class="widget popular-feeds mb-40">
+                        <h5 class="widget-title">Popular Feeds</h5>
+                        <div class="popular-feed-loop">
+                            <div class="single-popular-feed" *ngFor="let popularfeed of popularfeeds">
+                                <div class="feed-img">
+                                    <img src="{{popularfeed.img}}" alt="Image">
+                                </div>
+                                <div class="feed-desc">
+                                    <h6><a href="#">{{popularfeed.title}}</a></h6>
+                                    <span class="time"><i class="far fa-calendar-alt"></i> {{popularfeed.postdate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== LEGAL PART END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>

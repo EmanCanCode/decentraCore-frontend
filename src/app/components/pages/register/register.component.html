@@ -1,0 +1,58 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== LOGIN SECTION START ======-->
+<section class="login-sec pt-120 pb-120">
+    <div class="container">
+        <div class="account-wrapper">
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <div class="login-content" style="background-image: url('{{registerbg}}');">
+                        <div class="description text-center">
+                            <h2>Hello World!</h2>
+                            <p class="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login-form">
+                        <h2>Sign Up</h2>
+                        <form method="post">
+                            <div class="input-group input-group-two mb-20">
+                                <input type="text" placeholder="Username" name="username">
+                            </div>
+                            <div class="input-group input-group-two mb-20">
+                                <input type="email" placeholder="Email Address" name="email">
+                            </div>
+                            <div class="input-group input-group-two mb-30">
+                                <input type="password" placeholder="Password" name="password">
+                            </div>
+                            <a href="#">Forgot Password?</a>
+                            <button type="submit" class="main-btn btn-filled mt-20 login-btn">Signup</button>
+                            <div class="form-seperator">
+                                <span>OR</span>
+                            </div>
+                            <div class="social-buttons">
+                                <button type="button" class="main-btn btn-border facebook mb-20">
+                                    <i class="fab fa-facebook-f"></i>
+                                    Continue with Facebook
+                                </button>
+                                <button type="button" class="main-btn btn-filled mb-30">
+                                    <i class="fab fa-google"></i>
+                                    Continue with Google
+                                </button>
+                            </div>
+                            <p>Already have an Account?
+                                <a routerLink='/login' class="d-inline-block">Login</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== LOGIN SECTION END ======-->
+<!--====== INSTAGRAM FEED PART START ======-->
+<app-instafeeds></app-instafeeds>
+<!--====== INSTAGRAM FEED PART END ======-->
+<app-footerthree></app-footerthree>
