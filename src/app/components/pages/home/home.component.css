@@ -1,0 +1,105 @@
+/* Container that holds all category boxes */
+.uniform-categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+/* Each individual item */
+.uniform-categories-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Category box that fills its container */
+.uniform-categories-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Title within the category box, limited to 2 lines */
+.uniform-categories-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure Bootstrap grid columns stretch their contents */
+.row > [class*="col-"] {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Your card wrapper becomes a full-height flex column */
+.service-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Let the main content grow to fill available space */
+.service-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Push extra paragraph text to take up remaining space */
+.service-content p {
+  flex-grow: 1;
+}
+
+/* (other existing styles) */
+.vertical-text {
+  left: -80px;
+}
+
+.headshot-container {
+  margin-bottom: 100px;
+}
+
+.single-thumb {
+  width: 100%;
+  /* height: 300px; adjust height as needed */
+  overflow: hidden;
+}
+
+.single-thumb img {
+  width: 100%;
+  /* height: 100%; */
+  object-fit: cover;
+  object-position: center;
+}
+
+
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  max-height: 600px;       /* adjust to your banner height */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,60 @@
+/* turn the <ul> into a flex container so all <li> become flex items */
+.about-features {
+  display: flex;
+  flex-wrap: wrap;       /* wrap on smaller screens */
+  align-items: stretch;  /* make them all equal height */
+  gap: 1rem;             /* optional spacing between cards */
+}
+
+/* each <li> will share the available row-width equally */
+.about-features li {
+  flex: 1;               /* shorthand for flex:1 1 0%; i.e. equal width */
+  display: flex;         /* to allow inner <a> to stretch full height */
+}
+
+/* make the <a> fill its parent and center everything */
+.about-features li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+/* optional: ensure icon & text don’t wrap awkwardly */
+.about-features li .title {
+  white-space: nowrap;
+}
+
+.exp-card {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* 1) Turn the features-loop row into a flex container */
+.row.features-loop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* make all columns equal height */
+}
+
+/* 2) Let each Bootstrap column also stretch its child */
+.row.features-loop > [class*="col-"] {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 1.5rem; /* optional spacing between rows */
+}
+
+/* 3) Make the .feature-box fill its column and become a column-flex itself */
+.row.features-loop .feature-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;              /* grow to fill the column */
+}
+
+/* 4) Push the icon block down so extra text grows above it */
+.row.features-loop .feature-box .icon {
+  margin-top: auto;
+}

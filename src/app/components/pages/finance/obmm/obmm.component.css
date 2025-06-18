@@ -1,0 +1,37 @@
+/* Remove spinner arrows from number inputs for Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove spinner arrows for Firefox */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+
+.deposit-section {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.balances-table {
+  color: #fff;
+}
+
+td {
+  color: #fff;
+}
+
+.balances-table td,
+.balances-table th {
+  vertical-align: middle;
+}
+
+table.cw-cart-table td,
+table.cw-cart-table th {
+  vertical-align: middle;
+}

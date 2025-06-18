@@ -1,0 +1,89 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<!--====== SHOP SECTION START ======-->
+<section class="Shop-section pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5" *ngIf="ownsItem">
+                <div class="shop-detail-image">
+                    <ngx-slick-carousel class="detail-slider-1" #slickModal="slick-carousel" [config]="detailsliderConfig">
+                        <div ngxSlickItem class="slide-item" >
+                            <div class="image-box">
+                                <a href="#" (click)="$event.preventDefault()">
+                                    <img src="{{shopGridPost[itemId - 1].img}}" class="img-fluid" alt="img">
+                                </a>
+                                <span class="skills">{{shopGridPost[itemId - 1].tag}}</span>
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+            </div>
+            <div class="col-lg-7" *ngIf="ownsItem">
+                <div class="shop-detail-content">
+                    <h3 class="product-title mb-20">{{productRecords[itemId - 1].productName}}</h3>
+                    <div class="desc mb-20 pb-20 border-bottom">
+                        <span class="skills"><i class="fab fa-ethereum"></i> {{shopGridPost[itemId - 1].price}}</span>
+                    </div>
+                    <div
+                      class="short-descr mb-20"
+                      *ngIf="productRecords[itemId - 1]"
+                    >
+                        <p>{{productRecords[itemId - 1].additionalInfo}}</p>
+                    </div>
+                    <div class="quantity-cart d-block d-sm-flex">
+                        <div class="cart-btn" style="padding-left: 0%" *ngIf="state !== 2">
+                            <a href="#" (click)="$event.preventDefault(); receiveItem()" class="main-btn btn-border">Receive item</a>
+                        </div>
+                    </div>
+                    <div class="other-info flex mt-20">
+                        <h6>Tags:</h6>
+                        <ul>
+                            <li class="list-inline-item mr-2">
+                                <a href="#" (click)="$event.preventDefault()" class="grey">eman</a>
+                            </li>
+                            <li class="list-inline-item mr-2">
+                                <a href="#" (click)="$event.preventDefault()" class="grey">can</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" (click)="$event.preventDefault()" class="grey">code</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="product-description mt-100">
+                    <div class="tabs">
+                        <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center">
+                            <li ngbNavItem> <a ngbNavLink>Notice</a>
+                                <ng-template ngbNavContent>
+                                  <p *ngIf="ownsItem">
+                                    <strong>Disclaimer:</strong> The items and transactions displayed here are part of a
+                                    <em>playground blockchain demonstration</em>. They do not represent actual real-world
+                                    products or inventory movements. No genuine purchase, shipment, or ownership transfer
+                                    of goods is occurring, and no legal rights or claims to any physical items are conferred.
+                                    By viewing or interacting with this content, you acknowledge and agree that this is a
+                                    purely fictional simulation illustrating how supply chain processes could be modeled on
+                                    a blockchain.
+                                    <br><br>
+                                    For any real-world supply chain or logistics transactions, please consult licensed
+                                    professionals and comply with all applicable laws and regulations.
+                                  </p>
+                                  <p class="text-center" *ngIf="!ownsItem">
+                                    You have not purchased an item yet. Please visit the
+                                    <a routerLink="/supplyChain/shop">Supply Chain Shop</a> to purchase an item.
+                                  </p>
+                                </ng-template>
+                            </li>
+                        </ul>
+
+                        <div [ngbNavOutlet]="nav"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--====== SHOP SECTION END ======-->
+<app-footerthree></app-footerthree>

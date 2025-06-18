@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import $ from 'jquery';
+import { Web3Service } from 'src/app/services/web3/web3.service';
 
 @Component({
   selector: 'app-mobilemenu',
@@ -8,7 +9,7 @@ import $ from 'jquery';
 })
 export class MobilemenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private web3: Web3Service) { }
 
   ngOnInit(): void {
     function mobilemenu() {
@@ -36,4 +37,13 @@ export class MobilemenuComponent implements OnInit {
     mobilemenu()
   }
 
+  async connect() {
+    try {
+      console.log("Connecting to wallet...");
+      if (!this.web3.isWalletConnected()) await this.web3.connect();
+    } catch (error) {
+      console.error("Error connecting to wallet:", error);
+      alert("Error connecting to wallet");
+    }
+  }
 }

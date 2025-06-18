@@ -18,12 +18,12 @@ export class AppComponent implements OnInit {
   constructor(private titleService: Title, private breadcrumbService: BreadcrumbService) {
   }
   ngOnInit(): void {
-    this.breadcrumbService.breadcrumbChanged.subscribe(crumbs => {
+    this.breadcrumbService.breadcrumbChanged.subscribe((crumbs: any) => {
       this.titleService.setTitle(this.createTitle(crumbs));
     })
   }
   private createTitle(routesCollection: Breadcrumb[]) {
-    const title = 'Laramiss Angular';
+    const title = 'EmanCanCode';
     const titles = routesCollection.filter((route) => route.displayName);
 
     if (!titles.length) { return title; }
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
     return `${routeTitle} ${title}`;
   }
 
-  private titlesToString(titles) {
-    return titles.reduce((prev, curr) => {
+  private titlesToString(titles: any) {
+    return titles.reduce((prev: any, curr: any) => {
       return `${curr.displayName} - ${prev}`;
     }, '');
   }

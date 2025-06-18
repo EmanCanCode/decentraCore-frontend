@@ -25,7 +25,7 @@ export interface UserRealEstateLifeCycle {
   state: 'ownsProperty' | 'inEscrow' | 'inFinanceContract' | 'noProperty';
   propertyId?: number;  // nft id
   escrowAddress?: string; // address of the escrow contract spawned by factory
-  escrowLifeCycleState?: "No Earnest Deposited" | "Earned Deposited";
+  escrowLifeCycleState?: "No Earnest Deposited" | "Earnest Deposited";
 }
 
 
@@ -40,4 +40,51 @@ export interface EscrowParams {
   inspector: string;
   lender: string;
   appraiser: string;
+}
+
+
+export interface Item {
+  name: string;
+  description: string;
+  quantity: ethers.BigNumber;
+  reorderThreshold: ethers.BigNumber;
+}
+
+export interface ProductRecord {
+  productName: string;
+  variety: string;
+  productType: string;
+  timestamp: ethers.BigNumber;
+  location: string;
+  state: number;
+  additionalInfo: string;
+}
+
+
+export interface FinanceSwapTokenItem {
+  img: string;
+  title: string;
+  qty: number;
+}
+
+export type TokenTitle = 'Eman Token 1' | 'Eman Token 2';
+
+export interface ObmmTradeRecord {
+  time: string;
+  token: string;
+  pair: string;
+  price: string;
+  color: string;
+}
+
+
+
+export type FinanceType = 'CPAMM' | 'CSAMM' | 'OBMM';
+export interface FinanceDocument {  // CPAMM, CSAMM AND OBMM will have this interface
+    _id?: any;
+    type: FinanceType;
+    totalSwaps: number;
+    totalVolume: number;
+    totalFees: number;
+    totalCancelled?: number; // for obmm
 }

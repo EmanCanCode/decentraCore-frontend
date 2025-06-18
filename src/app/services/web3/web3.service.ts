@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import * as realEstateContractBuild from '../../blockchain/abis/realEstate/RealEstate.sol/RealEstate.json';
 import * as realEstateFinanceContractBuild from '../../blockchain/abis/realEstate/Finance.sol/Finance.json';
 import * as realEstateEscrowFactoryContractBuild from '../../blockchain/abis/realEstate/EscrowFactory.sol/EscrowFactory.json';
 import * as realEstateEscrowContractBuild from '../../blockchain/abis/realEstate/Escrow.sol/Escrow.json';
-import { UserRealEstateLifeCycle } from 'src/app/interfaces/interfaces';
+import { UserRealEstateLifeCycle } from '../../interfaces/interfaces';
 import $ from 'jquery';
 import { Router } from '@angular/router';
 
@@ -25,8 +25,9 @@ export class Web3Service {
   signer: ethers.Signer | null = null;
 
   constructor(
-    private router: Router
+    private router: Router,
   ) {
+    this.detectWallet();
     this.onNetworkChange();
     this.onAccountChange();
   }
@@ -54,6 +55,24 @@ export class Web3Service {
     }
   }
 
+  async connect() {
+    if (!window.ethereum) {
+      console.error('No Ethereum provider found');
+      return;
+    }
+
+    try {
+      await window.ethereum.request({
+        method: 'eth_requestAccounts'
+      });
+      console.log('User connected to wallet');
+      this.isConnected = true;
+      this.signer = this.provider?.getSigner() ?? null;
+    } catch (error) {
+      console.error('Failed to connect to wallet:', error);
+    }
+  }
+
   getProvider(): ethers.providers.Web3Provider | null {
     return this.provider;
   }
@@ -68,29 +87,45 @@ export class Web3Service {
       return;
     }
 
-    try {
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [
-          {
-            chainId: environment.web3.chainIdHex,
-            chainName: environment.web3.chainName,
-            nativeCurrency: {
-              name: 'ETH',
-              symbol: 'ETH',
-              decimals: 18,
-            },
-            rpcUrls: [environment.web3.rpcUrl],
-            blockExplorerUrls: [environment.web3.blockExplorer],
-          },
-        ],
-      });
+    const chainIdHex = environment.web3.chainIdHex;
 
-      console.log('User added/switched to custom chain:', environment.web3.chainName);
-    } catch (error) {
-      console.error('Failed to add/switch chain:', error);
+    try {
+      // Step 1: Try to switch
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: chainIdHex }],
+      });
+      console.log('Successfully switched to chain:', chainIdHex);
+    } catch (switchError: any) {
+      // Step 2: If the chain is not added, then try to add it
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: chainIdHex,
+                chainName: environment.web3.chainName,
+                nativeCurrency: {
+                  name: 'ETH',
+                  symbol: 'ETH',
+                  decimals: 18,
+                },
+                rpcUrls: [environment.web3.rpcUrl.replace(/\/$/, '')],
+                // blockExplorerUrls: [environment.web3.blockExplorer.replace(/\/$/, '')], // optional
+              },
+            ],
+          });
+          console.log('Successfully added and switched to chain:', chainIdHex);
+        } catch (addError) {
+          console.error('Failed to add the chain:', addError);
+        }
+      } else {
+        console.error('Failed to switch chain:', switchError);
+      }
     }
   }
+
 
   async onNetworkChange() {
     if (!window.ethereum) {
@@ -116,9 +151,29 @@ export class Web3Service {
 
     window.ethereum.on('accountsChanged', async (accounts: string[]) => {
       console.log('Account changed to:', accounts[0]);
-      await this.provider.send('eth_accounts', []);
-      this.signer = this.provider.getSigner();
+      await this.provider?.send('eth_accounts', []);
+      this.signer = this.provider?.getSigner() ?? null;
     });
+  }
+
+  getSigner() {
+    if (!this.provider) {
+      console.error('No provider found');
+      throw new Error('No provider found');
+    } else if (!this.signer) {
+      // try to connect to the wallet and get the signer
+      this.detectWallet().then(() => {
+        if (!this.signer) {
+          console.error('No signer found');
+          throw new Error('No signer found');
+        }
+      });
+
+    } else if (!this.isConnected) {
+      console.error('No wallet connected');
+      throw new Error('No wallet connected');
+    }
+    return this.signer!;
   }
 
   // real estate
@@ -139,15 +194,25 @@ export class Web3Service {
   }
 
   async userRealEstateLifeCycle(): Promise<UserRealEstateLifeCycle> {
-    let userRealEstateLifeCycleState: UserRealEstateLifeCycle;
+    console.log("getting user real estate life cycle state...");
+    let userRealEstateLifeCycleState: UserRealEstateLifeCycle = { state: 'noProperty' };
     const contract = await this.getRealEstateContract();
-    let ownsProperty = false;
+    const signerAddress = await this.signer.getAddress();
+    if (!contract) {
+      console.log('No contract found');
+      throw new Error('No contract found');
+    } else if (!signerAddress) {
+      console.log('No signer address found');
+      throw new Error('No signer address found');
+    }
 
     // Check ERC-1155 ownership
+    let ownsProperty = false;
     for (let i = 1; i <= 9; i++) {
-      const balance: ethers.BigNumber = await contract.balanceOf(await this.signer.getAddress(), i);
+      const balance: ethers.BigNumber = await contract.balanceOf(signerAddress, i);
       if (balance.gt(0)) {
         ownsProperty = true;
+        console.log('Owns property:', i);
         userRealEstateLifeCycleState = {
           state: 'ownsProperty',
           propertyId: i
@@ -163,7 +228,7 @@ export class Web3Service {
     // Check if in escrow by awaiting the ajax call
     let inEscrow = false;
     try {
-      const { propertyId, escrowAddress } = await this.checkEscrow(await this.signer.getAddress());
+      const { propertyId, escrowAddress } = await this.checkEscrow(signerAddress);
       console.log('In escrow, propertyId:', propertyId);
       inEscrow = true;
       // set userRealEstateLifeCycleState.escrowLifeCycleState
@@ -183,23 +248,15 @@ export class Web3Service {
     }
 
     // Check if property is in finance contract
-    const financeContract = new ethers.Contract(
-      environment.realEstateContracts.mortgageFinance,
-      realEstateFinanceContractBuild.abi,
-      this.signer
-    );
-    const idInFinance: ethers.BigNumber = await financeContract.idInFinance(await this.signer.getAddress());
+    const financeContract = this.realEstateFinanceContract;
+    const idInFinance: ethers.BigNumber = await financeContract.idInFinance(signerAddress);
     if (idInFinance.gt(0)) {
       userRealEstateLifeCycleState = {
         state: 'inFinanceContract',
         propertyId: idInFinance.toNumber()
       };
-      return userRealEstateLifeCycleState;
-    } else {
-      return {
-        state: 'noProperty'
-      };
     }
+    return userRealEstateLifeCycleState;
 
   }
 
@@ -208,15 +265,21 @@ export class Web3Service {
     escrowAddress: string
   }> {
     return new Promise((resolve, reject) => {
+      if (!this.signer) {
+        console.error('No signer found');
+        return reject('No signer found');
+      }
+      console.log("checking to see if in escrow");
       $.ajax({
         url: `${environment.api}/api/realEstate/${signerAddress}`,
         type: 'GET',
         success: async (response: { escrowId: string }) => {
+          console.log('Escrow ID:', response.escrowId);
           // create escrow factory instance call the escrows function pass in the escrow id for the escrow contract address
           const factory = new ethers.Contract(
             environment.realEstateContracts.escrowFactory,
             realEstateEscrowFactoryContractBuild.abi,
-            this.signer
+            this.signer!
           );
           const escrowAddress: string = await factory.escrows(response.escrowId);
           // create escrow contract instance, get propertyId from state variable of the smart contract
@@ -225,35 +288,55 @@ export class Web3Service {
           const propertyId: ethers.BigNumber = await escrowContract.nft_id();
           resolve({ propertyId: propertyId.toNumber(), escrowAddress });
         },
-        error: (error) => reject(error)
+        error: (error) => {
+          console.error('Error checking escrow:', error); ``
+          reject(error);
+        }
       });
     });
   }
 
   async getEscrowLifeCycleState(
     escrowAddress: string
-  ): Promise<
-    "No Earnest Deposited" | "Earned Deposited"
-  > {
-    const escrowContract = this.getEscrowContract(escrowAddress);
-
-    // determine earnest value === buyer deposits
-    const buyerDepositAmount: ethers.BigNumber = await escrowContract.deposit_balance(
-      await this.signer.getAddress()
-    );
-
-    if (
-      buyerDepositAmount.eq(
-        await escrowContract.earnest_amount() as ethers.BigNumber
-      ) || buyerDepositAmount.gt(0) // the contract says the buyer must deposit the exact amount as the earnest, but putting this here as a failsafe
-    ) {
-      return "Earned Deposited";
-    } else {
-      return "No Earnest Deposited";
+  ): Promise<"No Earnest Deposited" | "Earnest Deposited"> {
+    if (!this.signer) {
+      console.error('No signer found');
+      throw new Error('No signer found');
     }
+
+    const escrowContract = this.getEscrowContract(escrowAddress);
+    const userAddress = await this.signer.getAddress();
+
+    // 1) First, try to find any Deposit events for this user
+    //    We listen from block 0, but you can narrow it if you know the deployment block.
+    const filter = escrowContract.filters.Deposit(userAddress, null);
+    const events = await escrowContract.queryFilter(filter, 0, 'latest');
+
+    if (events.length > 0) {
+      console.log(`Found ${events.length} Deposit event(s) for ${userAddress}`);
+      return "Earnest Deposited";
+    }
+
+    // 2) Fallback: if no events, you can still do the balance check if you want
+    try {
+      const buyerDepositAmount: ethers.BigNumber = await escrowContract.deposit_balance(userAddress);
+      console.log('Buyer deposit amount:', buyerDepositAmount.toString());
+      if (buyerDepositAmount.gt(0)) {
+        return "Earnest Deposited";
+      }
+    } catch (err) {
+      console.warn('Balance lookup failed, relying on events only', err);
+    }
+
+    return "No Earnest Deposited";
   }
 
+
   getEscrowContract(escrowAddress: string): ethers.Contract {
+    if (!this.signer) {
+      console.error('No signer found');
+      throw new Error('No signer found');
+    }
     return new ethers.Contract(
       escrowAddress,
       realEstateEscrowContractBuild.abi,
@@ -262,6 +345,10 @@ export class Web3Service {
   }
 
   getEscrowFactoryContract(): ethers.Contract {
+    if (!this.signer) {
+      console.error('No signer found');
+      throw new Error('No signer found');
+    }
     return new ethers.Contract(
       environment.realEstateContracts.escrowFactory,
       realEstateEscrowFactoryContractBuild.abi,
@@ -299,8 +386,8 @@ export class Web3Service {
         1,
         purchasePrice,
         purchasePrice.div(100), // earnest amount is 1% of purchase price
-        buyer,
         seller,
+        buyer,
         escrowManager,
         escrowManager,
         escrowManager,
@@ -314,10 +401,50 @@ export class Web3Service {
 
   async signMessage(messageDigest: string): Promise<string> {
     try {
-      const signature = await this.signer.signMessage(ethers.utils.arrayify(messageDigest));
+      const signature = await this.signer?.signMessage(ethers.utils.arrayify(messageDigest));
+      if (!signature) {
+        throw new Error('No signature found');
+      }
       return signature;
     } catch (err) {
       console.error('Failed to sign message:', err);
+      throw err;
     }
+  }
+
+  // api/blockchain/faucet
+  requestFaucet() {
+    return new Promise(async (resolve, reject) => {
+      if (!this.signer) {
+        console.error('No signer found');
+        return;
+      }
+
+      const data = {
+        address: await this.signer.getAddress()
+      };
+
+      $.ajax({
+        url: `${environment.api}/api/blockchain/faucet`,
+        type: 'GET',
+        data,
+        success: (response) => {
+          console.log('Faucet request successful:', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('Error requesting faucet:', error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  get realEstateFinanceContract() {
+    return new ethers.Contract(
+      environment.realEstateContracts.mortgageFinance,
+      realEstateFinanceContractBuild.abi,
+      this.signer!
+    );
   }
 }

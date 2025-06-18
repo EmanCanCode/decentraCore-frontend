@@ -66,9 +66,26 @@
                             <a
                               href="javascript:void(0)"
                               class="main-btn btn-border"
-                              (click)="$event.preventDefault(); buyProperty()"
+                              *ngIf="isFirstTimeBuyer && !hasVerified"
+                              (click)="$event.preventDefault(); verifyEscrowData()"
                             >
                               Buy
+                            </a>
+                            <a
+                              href="javascript:void(0)"
+                              class="main-btn btn-border"
+                              *ngIf="isFirstTimeBuyer && hasVerified"
+                              (click)="$event.preventDefault(); createEscrowFromVerified()"
+                            >
+                              Create Escrow
+                            </a>
+                            <a
+                              href="javascript:void(0)"
+                              class="main-btn btn-border"
+                              *ngIf="hasCreatedEscrow"
+                              (click)="$event.preventDefault(); onViewPropertyClick()"
+                            >
+                              View Property
                             </a>
                         </div>
                     </div>

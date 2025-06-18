@@ -10,3 +10,7 @@
   max-height: 2.4em;      /* line-height * number of lines */
   white-space: normal;    /* Needed so multi-line can wrap */
 }
+
+.img-thumb {
+  cursor: pointer;
+}

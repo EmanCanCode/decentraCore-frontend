@@ -1,0 +1,195 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<section class="cart-section pt-120 pb-120">
+  <div class="container">
+    <div class="row">
+      <div class="row w-100">
+        <div class="col-lg-12 mb-60 w-100">
+          <div class="cw-product-promo">
+            <div class="cw-title">
+              <h5>Token Balances</h5>
+            </div>
+            <form>
+              <div class="form-group mb-0">
+                <label style="color: #fff">Eman Token 1:</label>
+                <label class="pb-15 pl-25">{{
+                  userBalances.emanToken1
+                  }}</label>
+                <br />
+                <label style="color: #fff">Eman Token 2:</label>
+                <label class="pb-15 pl-25">{{
+                  userBalances.emanToken2
+                  }}</label>
+                <br />
+                <button type="submit" class="main-btn btn-filled mt-4" (click)="refresh('balances')">
+                  Refresh
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="w-100 table-responsive mb-60">
+          <table class="table cw-cart-table mb-0">
+            <thead>
+              <tr>
+                <th scope="col" class="product-name text-center">Token</th>
+                <th scope="col" class="product-qty text-center">Quantity</th>
+                <th scope="col" class="product-name text-center">
+                  Import to Wallet
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let token of tokenList; let i = index;" class="text-center">
+                <td data-title="Token" class="has-title" style="color: #fff">
+                  <div class="product-thumbnail">
+                    <img src="{{ token.img }}" alt="product_thumbnail" />
+                  </div>
+                  {{ token.title }}
+                  <br />
+                  <span [ngClass]="{
+                      'give-label': i === 0,
+                      'get-label': i === 1
+                    }" class="text-sm-right w-100">
+                    You {{ i == 0 ? 'give' : 'get' }}
+                  </span>
+                </td>
+                <td class="quantity shop-detail-content cw-qty-sec cw-align has-title justify-content-center"
+                  data-title="Qty">
+                  <div class="quantity-box">
+                    <input style="width: 100%;" type="number" class="input-qty" name="name" value="{{ token.qty }}"
+                      (change)="onChangeSwapInputValue(token.title, $event)" />
+                  </div>
+                </td>
+                <td data-title="Import">
+                  <button type="button" class="main-btn btn-filled" (click)="import()">
+                    Import
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">
+                  <button class="main-btn btn-filled float-left" (click)="changeOrder()">
+                    Change Order
+                  </button>
+                  <button class="main-btn btn-filled float-right" (click)="swap()">
+                    Swap
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Liquidity & LPTs</h5>
+              </div>
+              <form>
+                <div class="form-group mb-0">
+                  <label style="color: #fff">Eman Token 1:</label>
+                  <label class="pb-15 pl-25">{{ reserves.emanToken1 }}</label>
+                  <br />
+                  <label style="color: #fff">Eman Token 2:</label>
+                  <label class="pb-15 pl-25"> {{ reserves.emanToken2 }}</label>
+                  <br />
+                  <label style="color: #fff">User LPTs:</label>
+                  <label class="pb-15 pl-25">{{ userLPTs }}</label> <br />
+                  <label style="color: #fff">Total LPTs:</label>
+                  <label class="pb-15 pl-25">{{ totalLPTs }}</label> <br />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="refresh('LPTs')">
+                    Refresh
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Add Liquidity</h5>
+              </div>
+              <!-- Bind form submission to onSubmitAddLiquidity() -->
+              <form (submit)="onSubmitAddLiquidity($event)">
+                <div class="form-group mb-0">
+                  <label for="et1AddLiq">Enter amount of Eman Token 1</label>
+                  <input type="text" class="form-control" placeholder="Amount of Eman Token 1" id="et1AddLiq"
+                    name="et1AddLiq" [(ngModel)]="amountToken1" (change)="updateAddLiquidityValues('token1')" />
+                  <label for="et2AddLiq" class="mt-25">
+                    Enter amount of Eman Token 2
+                  </label>
+                  <input type="text" class="form-control" placeholder="Amount of Eman Token 2" id="et2AddLiq"
+                    name="et2AddLiq" [(ngModel)]="amountToken2" (change)="updateAddLiquidityValues('token2')" />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="onSubmitAddLiquidity($event)">
+                    Add
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Add Liquidity</h5>
+              </div>
+              <form>
+                <div class="form-group mb-0">
+                  <label for="et1AddLiq">Enter amount of Eman Token 1</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Amount of Eman Token 1"
+                    id="et1AddLiq"
+                  />
+                  <label for="et2AddLiq" class="mt-25"
+                    >Enter amount of Eman Token 2</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Amount of Eman Token 2"
+                    id="et2AddLiq"
+                  />
+                  <button type="submit" class="main-btn btn-filled mt-4">
+                    Add
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Remove Liquidity</h5>
+              </div>
+              <form>
+                <div class="form-group mb-0">
+                  <label for="removeLiqBtn">Enter amount of Liquidity Pool Tokens to return</label>
+                  <input type="text" class="form-control" placeholder="Enter amount of LPTS (shares) to return"
+                    id="removeLiqBtn" name="removeLiqBtn" [(ngModel)]="amountLPTsToReturn" />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="removeLiquidity()">
+                    Remove
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footerthree></app-footerthree>

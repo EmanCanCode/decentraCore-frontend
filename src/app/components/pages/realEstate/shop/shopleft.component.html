@@ -11,7 +11,7 @@
             <div class="col-lg-8 col-md-10">
                 <div class="shop-products-wrapper">
                     <div class="shop-product-top">
-                        <p>Showing 9 of 9 results</p>
+                        <p>Showing {{displayedProperties.length}} of {{allProperties.length}} results</p>
                         <div class="sorting-box">
                             <select name="guests" id="guests" nice-select (change)="sortProperties($event.target.value)">
                                 <option value="1" disabled selected>Default Sorting</option>
@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6" *ngFor="let displayedProperty of displayedProperties">
                                 <div class="food-box shop-box">
-                                    <div class="thumb">
+                                    <div class="thumb img-thumb" (click)="viewProperty(displayedProperty.id)">
                                         <img src="{{displayedProperty.image}}" alt="images">
                                         <div class="badges">
                                             <span class="skills">{{displayedProperty.attributes.Bedrooms}} <i class="fas fa-bed"></i></span>
@@ -36,7 +36,7 @@
                                             <a [routerLink]="['/realEstate/view', displayedProperty.id]">{{displayedProperty.description}}</a>
                                         </h6>
                                         <br>
-                                        <span class="skills"><i class="fab fa-ethereum">&nbsp;</i>{{displayedProperty.price}}</span>
+                                        <span class="skills mt-20"><i class="fab fa-ethereum">&nbsp;</i>{{displayedProperty.price}}</span>
                                         <a [routerLink]="['/realEstate/view', displayedProperty.id]" class="link"><i class="fal fa-arrow-right"></i></a>
                                     </div>
                                 </div>

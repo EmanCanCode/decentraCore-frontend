@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { NgwWowService } from 'ngx-wow'; 
+import { NgwWowService } from 'ngx-wow';
 import $ from 'jquery';
 import 'magnific-popup';
 
@@ -17,14 +17,14 @@ export class AboutComponent implements AfterViewInit {
   videobg = 'assets/img/text-block/04.jpg';
   // Features
   featuresposts = [
-    {icon:'flaticon-ring',title:'Diamond Ring',animationtime:'.3s'},
-    {icon:'flaticon-bracelet',title:'Bracelets',animationtime:'.4s'},
-    {icon:'flaticon-necklace',title:'Necklaces',animationtime:'.5s'},
-    {icon:'flaticon-bracelet-2',title:'Pendants',animationtime:'.6s'},
-    {icon:'flaticon-earrings',title:'Earrings',animationtime:'.7s'},
+    {icon:'fas fa-file-contract',title:'Smart Contracts',animationtime:'.3s'},
+    {icon:'fas fa-laptop-code',title:'Web Apps',animationtime:'.4s'},
+    {icon:'fas fa-mobile-alt',title:'Mobile Apps',animationtime:'.5s'},
+    {icon:'fas fa-server',title:'Back-end',animationtime:'.6s'},
+    {icon:'fas fa-user-secret',title:'ZK',animationtime:'.7s'},
   ];
   // ABout img
-  aboutimg = 'assets/img/text-block/05.jpg';
+  aboutimg = 'assets/img/banner/emanUSMC.png';
   // COunter
   counterposts = [
     {icon:'flaticon-user-1',number:'8000',title:'Happy Users'},
@@ -34,7 +34,7 @@ export class AboutComponent implements AfterViewInit {
   // Galklery
   gallimg1 = 'assets/img/gallery/09.jpg';
   gallimg2 = 'assets/img/gallery/10.jpg';
-  // Blog 
+  // Blog
   latestpostConfig = {
     "slidesToShow": 3,
     "slidesToScroll": 1,
@@ -60,7 +60,7 @@ export class AboutComponent implements AfterViewInit {
     },
     ],
   };
-  blogposts = [ 
+  blogposts = [
     {img:'assets/img/latest-post/01.jpg',title:'New Retro Collection of Pendants and Ring sets.',postdate:'28th Aug 2020',authorname:'Admin',text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.'},
     {img:'assets/img/latest-post/02.jpg',title:'Special Wedding Rings Sets for Him and for Her.',postdate:'28th Aug 2020',authorname:'Admin',text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.'},
     {img:'assets/img/latest-post/03.jpg',title:'Matching Jewellery Sets with your Outwear.',postdate:'28th Aug 2020',authorname:'Admin',text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.'},

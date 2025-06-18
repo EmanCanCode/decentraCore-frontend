@@ -1,0 +1,81 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<section class="cart-section pt-120 pb-120" *ngIf="!loading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mb-60">
+        <div class="cw-product-promo">
+          <div class="cw-title">
+            <h5>Finance</h5>
+          </div>
+          <form>
+            <div class="form-group mb-0">
+              <label style="color: #fff">Total Swaps:</label>
+              <label class="pb-15 pl-25">{{
+                finance.totalSwaps
+              }}&nbsp;<i class="fab fa-ethereum"></i></label>
+              <br />
+              <label style="color: #fff">Total Volume:</label>
+              <label class="pb-15 pl-25">{{
+                finance.totalVolume.toFixed(4)
+              }}&nbsp;<i class="fab fa-ethereum"></i></label>
+              <br />
+              <label style="color: #fff">Total Fees:</label>
+              <label class="pb-15 pl-25">{{
+                finance.totalFees.toFixed(4)
+              }}</label>
+              <br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 mb-60">
+        <div class="cw-product-promo">
+          <div class="cw-title">
+            <h5>Real Estate</h5>
+          </div>
+          <form>
+            <div class="form-group mb-0">
+              <label style="color: #fff">Current Active Escrows:</label>
+              <label class="pb-15 pl-25">{{
+                realEstate.currentActiveEscrows
+              }}</label>
+              <br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 mb-60">
+        <div class="cw-product-promo">
+          <div class="cw-title">
+            <h5>Supply Chain</h5>
+          </div>
+          <form>
+            <div class="form-group mb-0">
+              <label style="color: #fff">Total Item Movements:</label>
+              <label class="pb-15 pl-25">{{
+                supplyChain.totalItemMovements
+              }}</label>
+              <br />
+              <label style="color: #fff">Total Value Processed:</label>
+              <label class="pb-15 pl-25">{{
+                supplyChain.totalValueProcessed.toFixed(4)
+              }}&nbsp;<i class="fab fa-ethereum"></i></label>
+              <br />
+              <label style="color: #fff">Total Completed Records:</label>
+              <label class="pb-15 pl-25">{{
+                supplyChain.completedRecords
+              }}</label>
+              <br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footerthree></app-footerthree>

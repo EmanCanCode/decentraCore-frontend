@@ -1,0 +1,65 @@
+/* Desktop: Center the quantity cell using flexbox */
+.cw-qty-sec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Remove spinner arrows from number inputs for Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove spinner arrows for Firefox */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .cw-cart-table th,
+  .cw-cart-table td {
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .quantity-box {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 10px;
+  }
+
+  .quantity-box button,
+  .quantity-box input.input-qty {
+    font-size: 14px;
+  }
+
+  .quantity-box button {
+    flex: 1;          /* buttons take roughly 1/6 each */
+    padding: 0;       /* remove internal padding */
+    margin: 0 2px;    /* small horizontal margin */
+    text-align: center;
+  }
+
+  .quantity-box input.input-qty {
+    flex: 4;          /* input takes remaining space */
+    padding: 0;       /* remove internal padding */
+    margin: 0 2px;
+    text-align: center;
+  }
+}
+
+.give-label {
+  color: #e74c3c; /* a solid red */
+  /* font-weight: bold; */
+}
+
+.get-label {
+  color: #2ecc71; /* a solid green */
+  /* font-weight: bold; */
+}

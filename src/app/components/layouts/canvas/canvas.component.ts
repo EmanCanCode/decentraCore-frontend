@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Web3Service } from 'src/app/services/web3/web3.service';
 
 @Component({
   selector: 'app-canvas',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CanvasComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private web3service: Web3Service,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  async connectWallet() {
+    await this.web3service.detectWallet();
+    await this.web3service.connect();
+  }
 }

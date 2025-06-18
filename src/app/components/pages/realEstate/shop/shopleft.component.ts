@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ethers } from 'ethers';
-import { DisplayedProperty, RealEstateMetadata } from 'src/app/interfaces/interfaces';
-import { Web3Service } from 'src/app/services/web3/web3.service';
-import { environment } from 'src/environments/environment';
+// import { DisplayedProperty, RealEstateMetadata } from 'src/app/interfaces/interfaces';
+import { DisplayedProperty, RealEstateMetadata } from '../../../../interfaces/interfaces';
+import { Web3Service } from '../../../../services/web3/web3.service';
+import { environment } from '../../../../../environments/environment';
 import $ from 'jquery';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 
 
@@ -25,10 +28,29 @@ export class ShopleftComponent implements OnInit {
   // The subset displayed after filtering
   displayedProperties: DisplayedProperty[] = [];
 
-  constructor(private web3Service: Web3Service) {}
+  constructor(
+    private web3Service: Web3Service,
+    private router: Router,
+    private alertService: AlertService
+  ) { }
 
   async ngOnInit() {
     await this.getPropertyList();
+    await this.alertService.notifyFirstVisit(
+      'realEstate:shop',
+      'Welcome to the Real Estate Marketplace',
+      `
+        <p>In this module, properties are tokenized as <strong>ERC-1155 NFTs</strong>, so a single smart contract can mint multiple unique property tokens—streamlining how you launch new listings.</p><br>
+        <p>On-chain escrow contracts handle offers, deposits, and transfers automatically and trustlessly, effectively making the entire traditional real estate process obsolete.</p><br>
+        <p><strong>Devs & Recruiters:</strong> WebSocket listeners push on-chain events through a Node/Express API into MongoDB, and the Angular app updates in real time—showcasing a true full-stack blockchain solution.</p><br>
+        <p><strong>Note:</strong> This runs on a local Hardhat test network, which I occasionally reset to keep things fresh—if data disappears, that’s why. If so, clear your Activity Tab Data in MetaMask settings.</p>
+      `.trim(),
+      {
+        confirmButtonText: 'Got it!',
+        confirmButtonColor: '#4da6ff',
+        customClass: { confirmButton: 'main-btn' }
+      }
+    );
   }
 
   async getPropertyList() {
@@ -119,8 +141,8 @@ export class ShopleftComponent implements OnInit {
 
     // reset our toggles if you want
     this.filter.singleFamily = selectedFilters.includes('Single Family');
-    this.filter.multiFamily  = selectedFilters.includes('Multi-Family');
-    this.filter.luxury       = selectedFilters.includes('Luxury');
+    this.filter.multiFamily = selectedFilters.includes('Multi-Family');
+    this.filter.luxury = selectedFilters.includes('Luxury');
 
     // apply filters to allProperties
     this.applyFilters();
@@ -147,4 +169,8 @@ export class ShopleftComponent implements OnInit {
     }
   }
 
+  viewProperty(id: number) {
+    console.log("Navigating to realEstate/view/" + id);
+    this.router.navigate(['realEstate', 'view', id]);
+  }
 }

@@ -1,75 +1,148 @@
-<!-- Search Widget -->
-<div class="widget search-widget">
-    <h5 class="widget-title">Search room</h5>
-    <form action="#">
-        <input type="text" placeholder="Search your keyword...">
-        <button type="submit"><i class="far fa-search"></i>
-      </button>
-    </form>
-</div>
 <!-- About Widget -->
 <div class="widget about-widget">
-    <h5 class="widget-title">About us</h5>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia reiciendis illo ipsa asperiores, perspiciatis corrupti veritatis assumenda architecto commodi provident quas necessitatibus consequatur praesentium magnam optio deserunt fugiat repellat
-        culpa.</p>
+  <h5 class="widget-title">Welcome!</h5>
+  <p>
+    Welcome to DecentraCore—a hands-on blockchain portfolio showcasing secure,
+    scalable decentralized solutions across finance, supply chain, and real
+    estate. Explore my work and see how I turn complex blockchain challenges
+    into production-ready innovations.
+  </p>
+</div>
+
+<div class="widget nav-widget">
+  <h5 class="widget-title">Web3 Wallet</h5>
+  <ul>
+    <li>
+      <a href="#" (click)="$event.preventDefault(); connectWallet()"
+        >Connect Wallet</a
+      >
+    </li>
+  </ul>
 </div>
 <!-- Nav Widget -->
 <div class="widget nav-widget">
-    <h5 class="widget-title">Our pages</h5>
-    <ul>
-        <li><a routerLink='/about'>About Us</a>
-        </li>
-        <li><a routerLink='/classification'>Classification</a>
+  <h5 class="widget-title">Pages</h5>
+  <ul>
+    <li><a routerLink="/about">About Me</a></li>
+    <li><a routerLink="/analytics">Analytics</a></li>
+    <li>
+      <a style="color: white;" href="#" (click)="$event.preventDefault()">Real Estate</a>
+      <ul class="submenu">
+        <li><a routerLink="/realEstate/shop">Shop</a></li>
+        <li><a routerLink="/realEstate/myProperty">My Property</a></li>
+      </ul>
+    </li>
+    <li>
+      <a style="color: white;" href="#" (click)="$event.preventDefault()">Finance</a>
+      <ul class="submenu">
+        <li><a routerLink="/finanace/cpamm">Constant Product AMM</a></li>
+        <li><a routerLink="/finanace/csamm">Constant Sum AMM</a></li>
+      </ul>
+    </li>
+    <li>
+      <a style="color: white;" href="#" (click)="$event.preventDefault()">Supply Chain</a>
+      <ul class="submenu">
+        <li>
+          <a routerLink="/supplyChain/shop" (click)="$event.preventDefault()"
+            >Shop</a
+          >
         </li>
         <li>
-            <a routerLink='/shop-left'>Shop</a>
-            <ul class="submenu">
-                <li><a routerLink='/shop-left'>Shop Left Sidebar</a>
-                </li>
-                <li><a routerLink='/shop-left-two'>Shop Left Sidebar v2</a>
-                </li>
-                <li><a routerLink='/shop-right'>Shop Right Sidebar</a>
-                </li>
-                <li><a routerLink='/shop-right-two'>Shop Right Sidebar v2</a>
-                </li>
-                <li><a routerLink='/shop-detail'>Shop Detail</a>
-                </li>
-            </ul>
+          <a routerLink="/supplyChain/myItem" (click)="$event.preventDefault()"
+            >My Item</a
+          >
         </li>
-        <li>
-            <a routerLink='/blog-grid'>Blog</a>
-            <ul class="submenu">
-                <li><a routerLink='/blog-grid-sidebar'>Blog Grid Sidebar</a>
-                </li>
-                <li><a routerLink='/blog-detail'>Blog Details</a>
-                </li>
-                <li><a routerLink='/blog-grid'>Blog Grid</a>
-                </li>
-                <li><a routerLink='/blog-list'>Blog List</a>
-                </li>
-            </ul>
-        </li>
-        <li><a routerLink='/gallery'>Our Gallery</a>
-        </li>
-        <li><a routerLink='/team'>Team</a>
-        </li>
-        <li><a routerLink='/contact'>Contact Us</a>
-        </li>
-    </ul>
+      </ul>
+    </li>
+    <li><a routerLink="/blog-detail">Blog</a></li>
+    <li><a routerLink="/contact">Contact Me</a></li>
+  </ul>
+</div>
+<div class="widget nav-widget">
+  <h5 class="widget-title">Documentation</h5>
+  <ul>
+    <li>
+      <a
+        href="https://github.com/EmanCanCode/decentraCore-blockchain"
+        target="_blank"
+        >DecentraCore</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#real-estate"
+        >Real Estate</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#finance"
+        >Finance</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#supply-chain"
+        >Supply Chain</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#listeners"
+        >Listeners</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#metadata"
+        >Metadata</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://github.com/EmanCanCode/decentraCore-backend"
+        target="_blank"
+        >Back End</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://github.com/EmanCanCode/decentraCore-frontend"
+        target="_blank"
+        >Web App</a
+      >
+    </li>
+  </ul>
 </div>
 <!-- Social Link -->
 <div class="widget social-link">
-    <h5 class="widget-title">Contact with us</h5>
-    <ul>
-        <li><a href="#"><i class="fab fa-facebook-f"></i></a>
-        </li>
-        <li><a href="#"><i class="fab fa-twitter"></i></a>
-        </li>
-        <li><a href="#"><i class="fab fa-behance"></i></a>
-        </li>
-        <li><a href="#"><i class="fab fa-linkedin"></i></a>
-        </li>
-        <li><a href="#"><i class="fab fa-google"></i></a>
-        </li>
-    </ul>
+  <h5 class="widget-title">Connect with me</h5>
+  <ul>
+    <li>
+      <a
+        aria-label="link"
+        target="_blank"
+        href="https://medium.com/@EmanCanCode"
+        ><i class="fab fa-medium"></i
+      ></a>
+    </li>
+    <li>
+      <a
+        aria-label="link"
+        target="_blank"
+        href="https://www.linkedin.com/in/emmanuel-douge-b26938227/"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+    </li>
+    <li>
+      <a aria-label="link" target="_blank" href="http://github.com/EmanCanCode"
+        ><i class="fab fa-github"></i
+      ></a>
+    </li>
+  </ul>
 </div>

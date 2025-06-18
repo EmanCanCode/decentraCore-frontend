@@ -1,119 +1,150 @@
 <ul class="sigma-main-menu">
-    <li class="menu-item menu-item-has-children">
-        <a href="#">
-          Home
-      </a>
+  <li class="menu-item">
+    <a href="#" (click)="$event.preventDefault(); connect();"> Connect Wallet </a>
+  </li>
+
+  <li class="menu-item menu-item-has-children">
+    <a href="#" (click)="$event.preventDefault();"> Pages </a>
+    <ul class="sub-menu">
+      <li class="menu-item">
+        <a routerLink="/">Home</a>
+      </li>
+      <li class="menu-item">
+        <a routerLink="/about">About</a>
+      </li>
+       <li class="menu-item">
+        <a routerLink="/blog-detail">Blog</a>
+      </li>
+      <li class="menu-item">
+        <a routerLink="/contact">Contact</a>
+      </li>
+      <li class="menu-item">
+        <a routerLink="/analytics">Analytics</a>
+      </li>
+      <li class="menu-item menu-item-has-children">
+        <a href="#" (click)="$event.preventDefault()"
+          >Finance</a
+        >
         <ul class="sub-menu">
-            <li class="menu-item">
-                <a routerLink='/'>Home 1</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/home-two'>Home 2</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/home-three'>Home 3</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/home-four'>Home 4</a>
-            </li>
+          <li class="menu-item">
+            <a style="color: #fff;" routerLink="/finance/cpamm">Constant Product</a>
+          </li>
+          <li class="menu-item">
+            <a style="color: #fff;" routerLink="/finance/csamm">Constant Sum</a>
+          </li>
         </ul>
-    </li>
-    <li class="menu-item menu-item-has-children">
-        <a href="#">Shop</a>
+      </li>
+      <li class="menu-item menu-item-has-children">
+        <a href="#" (click)="$event.preventDefault()"
+          >Real Estate</a
+        >
         <ul class="sub-menu">
-            <li class="menu-item">
-                <a routerLink='/shop-left'>Shop Left Sidebar</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/shop-left-two'>Shop Left Sidebar v2</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/shop-right'>Shop Right Sidebar</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/shop-right-two'>Shop Right Sidebar v2</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/shop-detail'>Product Details</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/account'>My Account</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/checkout'>Checkout</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/wishlist'>Wishlist</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/cart'>Cart</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/login'>Login</a>
-            </li>
+          <li class="menu-item">
+            <a style="color: #fff;" routerLink="/realEstate/shop">Shop</a>
+          </li>
+          <li class="menu-item">
+            <a style="color: #fff;" routerLink="/realEstate/myProperty">My Property</a>
+          </li>
         </ul>
-    </li>
-    <li class="menu-item menu-item-has-children">
-        <a href="#">
-          Blog
-      </a>
+      </li>
+      <li class="menu-item menu-item-has-children">
+        <a href="#" (click)="$event.preventDefault()"
+          >Supply Chain</a
+        >
         <ul class="sub-menu">
-            <li class="menu-item"> <a routerLink='/blog-grid-sidebar'>Blog Grid Sidebar</a>
-            </li>
-            <li class="menu-item"> <a routerLink='/blog-detail'>Blog Details</a>
-            </li>
-            <li class="menu-item"> <a routerLink='/blog-grid'>Blog Grid</a>
-            </li>
-            <li class="menu-item"> <a routerLink='/blog-list'>Blog List</a>
-            </li>
+          <li class="menu-item">
+            <a style="color: #fff;" routerLink="/supplyChain/shop">Shop</a>
+          </li>
+          <li class="menu-item">
+            <a style="color: #fff;" routerLink="/supplyChain/myProperty">My Item</a>
+          </li>
         </ul>
-    </li>
-    <li class="menu-item menu-item-has-children">
-        <a href="#">
-          Pages
-      </a>
-        <ul class="sub-menu">
-            <li class="menu-item">
-                <a routerLink='/classification'>Classification</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/account'>Account</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/gallery'>Gallery</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/team'>Team</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/error'>Error 404</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/coming-soon'>Coming Soon</a>
-            </li>
-            <li class="menu-item">
-                <a routerLink='/typography'>Typography</a>
-            </li>
-        </ul>
-    </li>
-    <li class="menu-item">
-        <a routerLink='/about'>
-          About
-      </a>
-    </li>
-    <li class="menu-item">
-        <a routerLink='/contact'>
-          Contact
-      </a>
-    </li>
-    <li class="menu-item">
-        <a routerLink='/shop-left'>
-          Diamond
-      </a>
-    </li>
-    <li class="menu-item">
-        <a routerLink='/shop-left'>
-          Accessories
-      </a>
-    </li>
+      </li>
+    </ul>
+  </li>
+
+  <li class="menu-item menu-item-has-children">
+    <a href="#" (click)="$event.preventDefault()"> Documentation </a>
+    <ul class="sub-menu">
+      <li class="menu-item">
+        <a
+          href="https://github.com/EmanCanCode/decentraCore-blockchain"
+          target="_blank"
+          >DecentraCore</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          target="_blank"
+          href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#real-estate"
+          >Real Estate</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          target="_blank"
+          href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#finance"
+          >Finance</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          target="_blank"
+          href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#supply-chain"
+          >Supply Chain</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          target="_blank"
+          href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#listeners"
+          >Listeners</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          target="_blank"
+          href="https://github.com/EmanCanCode/decentraCore-blockchain?tab=readme-ov-file#metadata"
+          >Metadata</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          href="https://github.com/EmanCanCode/decentraCore-backend"
+          target="_blank"
+          >Back End</a
+        >
+      </li>
+      <li class="menu-item">
+        <a
+          href="https://github.com/EmanCanCode/decentraCore-frontend"
+          target="_blank"
+          >Web App</a
+        >
+      </li>
+    </ul>
+  </li>
+
+  <li class="menu-item menu-item-has-children">
+    <a href="#" (click)="$event.preventDefault()">Connect With Me</a>
+    <ul class="sub-menu">
+      <li class="menu-item">
+        <a href="https://medium.com/@EmanCanCode" target="_blank"
+          >Medium <i class="fab fa-medium"></i
+        ></a>
+      </li>
+      <li class="menu-item">
+        <a
+          href="https://www.linkedin.com/in/emmanuel-douge-b26938227/"
+          target="_blank"
+          >LinkedIn <i class="fab fa-linkedin"></i
+        ></a>
+      </li>
+      <li class="menu-item">
+        <a href="https://github.com/EmanCanCode" target="_blank"
+          >Github <i class="fab fa-github"></i
+        ></a>
+      </li>
+    </ul>
+  </li>
 </ul>

@@ -1,1 +1,7 @@
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-straight/css/uicons-thin-straight.css');
+.custom-about-img {
+  height: 350px !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  url: 'http://localhost:4200',
   production: false,
   financeContracts: {
     "Eman Token 1": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
@@ -32,7 +33,7 @@ export const environment = {
     rpcUrl: "http://127.0.0.1:8545/",
     chainIdHex: "0x7A69",
     chainName: "Hardhat Playground",
-    blockExplorer: "http://127.0.0.1:1234"
+    // blockExplorer: "http://127.0.0.1:1234"
   },
   api: 'http://localhost:3000',
   escrowManager: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955'

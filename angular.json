@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "laramiss": {
+    "emancancode": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/laramiss",
+            "outputPath": "dist/emancancode",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -78,18 +78,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "laramiss:build"
+            "browserTarget": "emancancode:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "laramiss:build:production"
+              "browserTarget": "emancancode:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "laramiss:build"
+            "browserTarget": "emancancode:build"
           }
         },
         "test": {
@@ -126,18 +126,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "laramiss:serve"
+            "devServerTarget": "emancancode:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "laramiss:serve:production"
+              "devServerTarget": "emancancode:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "laramiss",
+  "defaultProject": "emancancode",
   "cli": {
     "analytics": "00cb6d52-099d-4148-9174-eda4708019f0"
   }

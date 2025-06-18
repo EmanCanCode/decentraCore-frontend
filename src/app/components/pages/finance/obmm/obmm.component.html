@@ -1,0 +1,250 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+
+<section class="cart-section pt-120 pb-120">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Price Chart -->
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Price Charts</h5>
+              </div>
+              <!-- PRICE CHART HERE -->
+            </div>
+          </div>
+        </div>
+        <!-- Balances -->
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Balances</h5>
+              </div>
+              <div class="w-100 table-responsive">
+                <table class="table cw-cart-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="product-name text-center">Token</th>
+                      <th scope="col" class="product-qty text-center">Wallet</th>
+                      <th scope="col" class="product-name text-center">
+                        Exchange
+                      </th>
+                      <th scope="col" class="product-name text-center">
+                        Import to Wallet
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center balances-table" *ngFor="let token of balances | keyvalue">
+                      <td>{{ token.key }}</td>
+                      <td>{{ token.value.wallet }}</td>
+                      <td>{{ token.value.exchange }}</td>
+                      <td data-title="Import">
+                        <button
+                          type="button"
+                          class="main-btn btn-filled"
+                          (click)="import()"
+                        >
+                          Import
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Deposit / Withdraw -->
+        <div class="row">
+          <div class="col-lg-12 mb-60 h-100">
+            <div class="cw-product-promo deposit-section h-100">
+              <div class="cw-title">
+                <h5>Deposit / Withdraw</h5>
+              </div>
+              <label for="actionSelect">Select an action</label>
+              <select nice-select id="actionSelect" class="mb-20" (change)="onActionChange($event)">
+                <option>Deposit</option>
+                <option>Withdraw</option>
+              </select>
+              <label for="assetSelect">Select an asset</label>
+              <select nice-select id="assetSelect" class="mb-20"  (change)="onAssetChange($event)">
+                <option>ETH</option>
+                <option>Eman Token 1</option>
+                <option>Eman Token 2</option>
+              </select>
+              <form>
+                <div class="form-group mb-0">
+                  <label for="assetAmount"
+                    >Enter an amount to deposit / withdraw</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Amount"
+                    id="assetAmount"
+                    [(ngModel)]="assetAmount"
+                    name="assetAmount"
+                  />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="onSubmitDepositWithdraw($event)">
+                    {{selectedAction}}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Make Order -->
+        <div class="row">
+          <div class="col-lg-12 mb-60 h-100">
+            <div class="cw-product-promo deposit-section h-100">
+              <div class="cw-title">
+                <h5>Make Order</h5>
+              </div>
+              <label for="assetFromExchange">Select an asset receive</label>
+              <select nice-select id="assetFromExchange" class="mb-20">
+                <option>ETH</option>
+                <option>Eman Token 1</option>
+                <option>Eman Token 2</option>
+              </select>
+              <form>
+                <div class="form-group mb-0">
+                  <label for="assetFromExchangeAmount"
+                    >Enter an amount to receive</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Amount"
+                    id="assetFromExchangeAmount"
+                    name="assetFromExchangeAmount"
+                  />
+                </div>
+              </form>
+              <label for="assetToExchange">Select an asset to swap</label>
+              <select nice-select id="assetToExchange" class="mb-20" >
+                <option>Eman Token 1</option>
+                <option>Eman Token 2</option>
+                <option>ETH</option>
+              </select>
+              <form>
+                <div class="form-group mb-20">
+                  <label for="assetToExchangeAmount"
+                    >Enter an amount to swap</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Amount"
+                    id="assetToExchangeAmount"
+                    name="assetToExchangeAmount"
+                  />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="makeOrder($event)">
+                    Make Order
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- My Transactions -->
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>My Transactions</h5>
+              </div>
+              <div class="w-100 table-responsive">
+                <table class="table cw-cart-table mb-0" *ngIf="txType == 'Trades'">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="product-name text-center">Time</th>
+                      <th scope="col" class="product-name text-center">Token</th>
+                      <th scope="col" class="product-name text-center">Pair</th>
+                      <th scope="col" class="product-name text-center">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center" *ngFor="let tx of myTrades">
+                      <td>{{ tx.time }}</td>
+                      <td>{{ tx.token }}</td>
+                      <td>{{ tx.pair }}</td>
+                      <td>+{{ tx.amount }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table cw-cart-table mb-0" *ngIf="txType == 'Orders'">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="product-name text-center">Token</th>
+                      <th scope="col" class="product-name text-center">Pair</th>
+                      <th scope="col" class="product-name text-center">Amount</th>
+                      <th scope="col" class="product-name text-center">Cancel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center" *ngFor="let tx of myOpenOrders">
+                      <td>{{ tx.token }}</td>
+                      <td>{{ tx.pair }}</td>
+                      <td>{{ tx.amount }}</td>
+                      <td style="cursor: pointer;" (click)="cancelOrder(tx.id)">x</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button
+                  class="main-btn btn-filled mt-4"
+                  (click)="txType = 'Orders'"
+                  *ngIf="txType == 'Trades'"
+                >
+                  See Orders
+                </button>
+                <button
+                  class="main-btn btn-filled mt-4"
+                  (click)="txType = 'Trades'"
+                  *ngIf="txType == 'Orders'"
+                >
+                  See Trades
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- All Trades -->
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>All Trades</h5>
+              </div>
+              <div class="w-100 table-responsive">
+                <table class="table cw-cart-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="product-name text-center">Time</th>
+                      <th scope="col" class="product-name text-center">Token</th>
+                      <th scope="col" class="product-name text-center">Pair</th>
+                      <th scope="col" class="product-name text-center">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center" *ngFor="let trade of allTrades">
+                      <td>{{ trade.time }}</td>
+                      <td>{{ trade.token }}</td>
+                      <td>{{ trade.pair }}</td>
+                      <td [style.color]="trade.color">{{ trade.price }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footerthree></app-footerthree>
