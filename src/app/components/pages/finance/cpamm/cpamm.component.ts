@@ -123,11 +123,19 @@ export class CpammComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     const newValue = Number(inputElement.value);
     if (isNaN(newValue) || newValue < 0) {
+      const html = `
+        <div style="text-align: left;">
+          <p>
+            You entered an invalid value. Only positive numbers are allowed.
+          </p>
+        </div>
+      `;
       await this.alertService.fire(
         'error',
         'Invalid Input',
-        'Please enter a valid positive number.',
+        undefined,
         {
+          html,
           confirmButtonText: 'OK',
           confirmButtonColor: '#ff4d4d',
           customClass: { confirmButton: 'main-btn' }

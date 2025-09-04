@@ -9,8 +9,8 @@
                     <div class="product-wrapper restaurant-tab-area">
                         <div class="row">
                             <div class="col-lg-4 col-md-6" *ngFor="let shopGrid of shopGridPost">
-                                <div class="food-box shop-box">
-                                    <div class="thumb" (click)="viewItem(shopGrid.link)">
+                                <div class="food-box shop-box sc-item" (click)="viewItem(shopGrid.link)">
+                                    <div class="thumb">
                                         <img src="{{shopGrid.img}}" alt="images">
                                         <div class="badges">
                                             <span class="skills" *ngIf="shopGrid.tag">{{shopGrid.tag}}</span>
@@ -22,10 +22,10 @@
                                         </div>
                                     </div>
                                     <div class="desc">
-                                        <h4>
+                                        <h4 class="mt-10">
                                             <a href="#" (click)="$event.preventDefault()">{{shopGrid.title}}</a>
                                         </h4>
-                                        <span class="skills"><i class="fab fa-ethereum"></i>  {{shopGrid.price}}</span>
+                                        <span class="skills mt-10"><i class="fab fa-ethereum"></i>  {{shopGrid.price}}</span>
                                         <a aria-label="right-arrow" href="#" (click)="$event.preventDefault()" class="link"><i class="fal fa-arrow-right"></i></a>
                                     </div>
                                 </div>

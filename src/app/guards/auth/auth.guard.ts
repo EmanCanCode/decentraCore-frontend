@@ -8,7 +8,6 @@ import {
   UrlTree,
   Router
 } from '@angular/router';
-import { ethers } from 'ethers';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Web3Service } from 'src/app/services/web3/web3.service';
 
@@ -64,7 +63,7 @@ export class AuthGuard implements CanActivate {
     // 3. Faucet check & send if needed
     const didFund = await this.alertService.faucetCheck();
     if (didFund) {
-      return false;
+      return this.router.parseUrl('/'); // Redirect to home after funding
     }
 
     // 5. All clear—allow route activation

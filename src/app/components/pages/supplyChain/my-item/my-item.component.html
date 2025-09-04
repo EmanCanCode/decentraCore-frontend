@@ -22,7 +22,7 @@
                 <div class="shop-detail-content">
                     <h3 class="product-title mb-20">{{productRecords[itemId - 1].productName}}</h3>
                     <div class="desc mb-20 pb-20 border-bottom">
-                        <span class="skills"><i class="fab fa-ethereum"></i> {{shopGridPost[itemId - 1].price}}</span>
+                        <span class="skills"><i class="fab fa-ethereum"></i> {{shopGridPost[itemId - 1].price}} {{state == 2 ? "(Delivered)" : ""}}</span>
                     </div>
                     <div
                       class="short-descr mb-20"

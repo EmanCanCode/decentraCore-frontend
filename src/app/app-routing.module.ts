@@ -63,13 +63,13 @@ const routes: Routes = [
   {
     path: 'finance/cpamm',
     component: CpammComponent,
-    data: { breadcrumb: "CPAMM" },
+    data: { breadcrumb: "Constant Product" },
     canActivate: [AuthGuard]
   },
   {
     path: 'finance/csamm',
     component: CsammComponent,
-    data: { breadcrumb: "CSAMM" },
+    data: { breadcrumb: "Constant Sum" },
     canActivate: [AuthGuard]
   },
   // {

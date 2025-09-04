@@ -36,6 +36,12 @@ export class AlertService {
   ) {
     if (this.welcomeNotified) return;
     this.welcomeNotified = true;
+    if (options) {
+      console.log('AlertService.welcome: using custom options', options);
+      options.background = '#353530';
+      options.color = 'white';
+      console.log('AlertService.welcome: updated options', options);
+    }
     await Swal.fire({ icon, title, text, ...options });
   }
 
@@ -48,6 +54,37 @@ export class AlertService {
     text?: string,
     options?: SweetAlertOptions
   ): Promise<SweetAlertResult> {
+    if (text && options && options.html) {
+      console.warn('AlertService.fire: both text and html provided, using html only');
+      text = undefined; // clear text if html is provided
+    }
+    if (text && options && !options.html) {
+      options.html = `
+        <div style="text-align: left">
+          <p>${text}</p>
+        </div>
+      `;
+      text = undefined; // clear text since we are using html
+    }
+
+    if (icon === 'info' && options) {
+      // confirmButtonColor: '#4da6ff',
+      //   customClass: { confirmButton: 'main-btn' }
+      options.confirmButtonColor = '#4da6ff';
+      options.customClass = { confirmButton: 'main-btn swal-bg-modal' };
+    }
+
+    if (icon === 'warning' && options) {
+      options.customClass = { confirmButton: 'main-btn swal-warning swal-bg-modal' };
+    }
+
+    if (icon === 'error' && options) {
+      options.customClass = { confirmButton: 'main-btn swal-error swal-bg-modal' };
+    }
+
+    options.background = '#353530';
+    options.color = 'white';
+
     return Swal.fire({ icon, title, text, ...options });
   }
 
@@ -55,6 +92,11 @@ export class AlertService {
    * faucet notice & send
    */
   async alertFaucet(options?: SweetAlertOptions): Promise<void> {
+    if (!options) {
+      options = {};
+      options.background = '#353530';
+      options.color = 'white';
+    }
     await Swal.fire({
       icon: 'warning',
       title: 'Funding Your Wallet',
@@ -63,7 +105,8 @@ export class AlertService {
         <p>Please <strong>check wallet balance to update</strong> before interacting with the dApp.</p>
       `.trim(),
       confirmButtonText: 'Thanks!',
-      customClass: { confirmButton: 'btn btn-primary' },
+      confirmButtonColor: '#4da6ff',
+      customClass: { confirmButton: 'main-btn swal-warning' },
       ...options
     });
   }
@@ -114,6 +157,8 @@ export class AlertService {
       return;
     }
     this.visitedRoutes.set(routeKey, true);
+    options.background = '#353530';
+    options.color = 'white';
     await this.fire(
       'info',
       title,
@@ -121,7 +166,8 @@ export class AlertService {
       {
         html,
         confirmButtonText: 'Got it!',
-        customClass: { confirmButton: 'btn btn-primary' },
+        confirmButtonColor: '#4da6ff',
+        customClass: { confirmButton: 'main-btn' },
         ...options
       }
     );

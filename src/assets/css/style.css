@@ -430,6 +430,35 @@ select {
     border: 2px solid #4da6ff;
 }
 
+.swal-bg-modal {
+  /* background-color: #353530 !important;
+  color: #a3a3a3 !important; */
+}
+
+.swal-warning {
+  border-color: #ffcc00;
+  background-color: #ffcc00;
+}
+
+.swal-warning:hover {
+  border-color: #c8a411;
+  background-color: #c8a411;
+}
+
+.swal-error {
+  border-color: #ff4d4d;
+  background-color: #ff4d4d;
+}
+
+.swal-error:hover {
+  background-color: #d13b3b;
+  border-color:     #d13b3b;
+}
+
+.sc-item {
+  cursor: pointer;
+}
+
 .swal2-confirm {
   color: white;
 }

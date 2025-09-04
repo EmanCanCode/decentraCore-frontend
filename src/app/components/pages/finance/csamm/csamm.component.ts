@@ -32,8 +32,8 @@ export class CsammComponent implements OnInit {
 
   // Example token list for display (unchanged)
   tokenList = [
-    { img: 'assets/img/web3/emanToken1.png', title: 'Eman Token 1', qty: 1 },
-    { img: 'assets/img/web3/emanToken2.png', title: 'Eman Token 2', qty: 1 },
+    { img: 'assets/img/web3/emanToken1.png', title: 'Eman Token 1', qty: 0 },
+    { img: 'assets/img/web3/emanToken2.png', title: 'Eman Token 2', qty: 0 },
   ];
 
   constructor(
@@ -95,6 +95,26 @@ export class CsammComponent implements OnInit {
 
   // Helper function to update the complementary token quantity
   async updateComplementaryQuantity(changedToken: TokenTitle, newValue: number): Promise<void> {
+    if (newValue < 15_000) {
+      await this.alertService.fire(
+        'warning',
+        'Minimum Swap Amount',
+        'The minimum amount for a swap is 15,000 tokens.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ffcc00',
+          customClass: { confirmButton: 'main-btn swal-warning' }
+        }
+      );
+      console.warn('New value is below minimum swap amount');
+
+      // Reset the changed token's quantity to 0
+      const changedIndex = this.tokenList.findIndex(t => t.title === changedToken);
+      this.tokenList[changedIndex].qty = 0;
+      console.log(`Reset ${changedToken} quantity to 0 due to minimum amount requirement`);
+      return;
+    }
+
     let tokenContract: ethers.Contract;
     let amountOut: ethers.BigNumber;
 
@@ -174,7 +194,7 @@ export class CsammComponent implements OnInit {
     const html = `
       <div style="text-align: left;">
         <p>
-          You’re about to approve tokens so the dApp can swap <strong>${amountIn} ${tokenInSymbol}</strong> against the Constant Product AMM.
+          You’re about to approve tokens so the dApp can swap <strong>${amountIn} ${tokenInSymbol}</strong> against the Constant Sum AMM.
           MetaMask will prompt you to confirm the <code>swap()</code> transaction on-chain.
         </p><br>
         <p>

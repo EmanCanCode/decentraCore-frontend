@@ -4,6 +4,32 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div class="row">
+          <div class="col-lg-12 mb-60">
+            <div class="cw-product-promo">
+              <div class="cw-title">
+                <h5>Token Balances</h5>
+              </div>
+              <form>
+                <div class="form-group mb-0">
+                  <label style="color: #fff">Eman Token 1:</label>
+                  <label class="pb-15 pl-25">{{
+                    userBalances.emanToken1
+                  }}</label>
+                  <br />
+                  <label style="color: #fff">Eman Token 2:</label>
+                  <label class="pb-15 pl-25">{{
+                    userBalances.emanToken2
+                  }}</label>
+                  <br />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="refresh('balances')">
+                    Refresh
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <div class="w-100 table-responsive mb-60">
           <table class="table cw-cart-table mb-0">
             <thead>
@@ -17,8 +43,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let token of tokenList; let i = index;" class="text-center">
-                <td data-title="Token" class="has-title" style="color: #fff">
-                  <div class="product-thumbnail">
+                <td data-title="Token" class="has-title pt-10" style="color: #fff">
+                  <div class="product-thumbnail mt-10">
                     <img src="{{ token.img }}" alt="product_thumbnail" />
                   </div>
                   {{ token.title }}
@@ -83,32 +109,6 @@
           <div class="col-lg-12 mb-60">
             <div class="cw-product-promo">
               <div class="cw-title">
-                <h5>Token Balances</h5>
-              </div>
-              <form>
-                <div class="form-group mb-0">
-                  <label style="color: #fff">Eman Token 1:</label>
-                  <label class="pb-15 pl-25">{{
-                    userBalances.emanToken1
-                  }}</label>
-                  <br />
-                  <label style="color: #fff">Eman Token 2:</label>
-                  <label class="pb-15 pl-25">{{
-                    userBalances.emanToken2
-                  }}</label>
-                  <br />
-                  <button type="submit" class="main-btn btn-filled mt-4" (click)="refresh('balances')">
-                    Refresh
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 mb-60">
-            <div class="cw-product-promo">
-              <div class="cw-title">
                 <h5>Liquidity & LPTs</h5>
               </div>
               <form>
@@ -135,7 +135,7 @@
           <div class="col-lg-12 mb-60">
             <div class="cw-product-promo">
               <div class="cw-title">
-                <h5>Add Liquidity</h5>
+                <h5>Add Liquidity for LPTs</h5>
               </div>
               <!-- Bind form submission to onSubmitAddLiquidity() -->
               <form (submit)="onSubmitAddLiquidity($event)">
@@ -178,7 +178,7 @@
           <div class="col-lg-12 mb-60">
             <div class="cw-product-promo">
               <div class="cw-title">
-                <h5>Remove Liquidity</h5>
+                <h5>Remove Liquidity for Tokens</h5>
               </div>
               <form>
                 <div class="form-group mb-0">

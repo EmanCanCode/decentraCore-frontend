@@ -40,7 +40,9 @@ export class ShopleftComponent implements OnInit {
       'realEstate:shop',
       'Welcome to the Real Estate Marketplace',
       `
-        <p>In this module, properties are tokenized as <strong>ERC-1155 NFTs</strong>, so a single smart contract can mint multiple unique property tokens—streamlining how you launch new listings.</p><br>
+        <p>
+          Discover properties tokenized as <strong>ERC-1155 NFTs</strong> with a browsing experience reminiscent of Zillow—only here, every listing, offer, and transfer is recorded immutably on-chain.
+        </p><br>
         <p>On-chain escrow contracts handle offers, deposits, and transfers automatically and trustlessly, effectively making the entire traditional real estate process obsolete.</p><br>
         <p><strong>Devs & Recruiters:</strong> WebSocket listeners push on-chain events through a Node/Express API into MongoDB, and the Angular app updates in real time—showcasing a true full-stack blockchain solution.</p><br>
         <p><strong>Note:</strong> This runs on a local Hardhat test network, which I occasionally reset to keep things fresh—if data disappears, that’s why. If so, clear your Activity Tab Data in MetaMask settings.</p>

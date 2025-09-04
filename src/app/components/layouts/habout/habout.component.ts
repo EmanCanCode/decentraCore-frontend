@@ -17,7 +17,8 @@ export class HaboutComponent implements OnInit {
   // aboutimg2 = 'assets/img/feature/aboutImg3.jpg';
   aboutimg2 = 'assets/img/bg/nodes.webp';
   // aboutbottomimg = 'assets/img/bg/bottomAboutImg.webp';
-  aboutbottomimg = 'assets/img/bg/sky.webp';
+  // aboutbottomimg = 'assets/img/bg/sky.webp';
+  aboutbottomimg = 'assets/img/bg/dc1.png';
   ngOnInit(): void {
   }
 

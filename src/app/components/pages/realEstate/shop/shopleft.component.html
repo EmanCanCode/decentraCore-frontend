@@ -23,7 +23,7 @@
                     <div class="product-wrapper restaurant-tab-area">
                         <div class="row">
                             <div class="col-lg-4 col-md-6" *ngFor="let displayedProperty of displayedProperties">
-                                <div class="food-box shop-box">
+                                <div class="food-box shop-box sc-item">
                                     <div class="thumb img-thumb" (click)="viewProperty(displayedProperty.id)">
                                         <img src="{{displayedProperty.image}}" alt="images">
                                         <div class="badges">
@@ -32,11 +32,11 @@
                                         </div>
                                     </div>
                                     <div class="desc">
-                                        <h6>
+                                        <h6 class="mt-10">
                                             <a [routerLink]="['/realEstate/view', displayedProperty.id]">{{displayedProperty.description}}</a>
                                         </h6>
                                         <br>
-                                        <span class="skills mt-20"><i class="fab fa-ethereum">&nbsp;</i>{{displayedProperty.price}}</span>
+                                        <span class="skills mt-10"><i class="fab fa-ethereum">&nbsp;</i>{{displayedProperty.price}}</span>
                                         <a [routerLink]="['/realEstate/view', displayedProperty.id]" class="link"><i class="fal fa-arrow-right"></i></a>
                                     </div>
                                 </div>

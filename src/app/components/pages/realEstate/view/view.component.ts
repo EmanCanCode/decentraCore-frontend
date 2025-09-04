@@ -263,7 +263,7 @@ export class ViewComponent implements OnInit {
     });
 
     if (!buyerSignature) {
-      this.alertService.fire(
+      await this.alertService.fire(
         'error',
         'Failed to Sign Escrow Data',
         'Please try again or contact support if the issue persists.',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ethers } from 'ethers';
 import { Item } from 'src/app/interfaces/interfaces';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { SupplyChainService } from 'src/app/services/supplyChain/supply-chain.service';
 import { Web3Service } from 'src/app/services/web3/web3.service';
 
@@ -77,7 +78,7 @@ export class MyItemComponent implements OnInit {
   constructor(
     private supplyChainService: SupplyChainService,
     private web3Service: Web3Service,
-    private router: Router
+    private alertService: AlertService
   ) { }
 
   async ngOnInit() {
@@ -85,6 +86,36 @@ export class MyItemComponent implements OnInit {
     if (userProductHistory === 'No Product History') {
       return;
     }
+
+    await this.alertService.notifyFirstVisit(
+      'supplyChain:myItem',
+      'Receive Your Package',
+      `
+        <div style="text-align: left;">
+          <p>
+            Much like Amazon’s “Delivered” step, this page lets you complete the final handoff for your physical purchase.
+            When your item arrives, click <strong>Receive Item</strong> to “sign” for the package and mark it as delivered.
+          </p><br>
+          <p>
+            Clicking here simulates the real-world delivery confirmation:
+            it releases your crypto payment from escrow to the seller,
+            and records the <em>Delivered</em> state on-chain—finishing the full provenance trail
+            (Created → In Transit → Delivered) I built into DecentraCore’s Supply Chain module.
+          </p><br>
+          <p>
+            While the Real Estate section uses NFTs to represent property transfers, this flow mirrors
+            a standard e-commerce delivery of physical goods, complete with automated restocking
+            via the <code>AutomatedProcess</code> contract when stock runs low.
+          </p>
+        </div>
+      `.trim(),
+      {
+        confirmButtonText: 'Understood',
+        confirmButtonColor: '#4da6ff',
+        customClass: { confirmButton: 'main-btn' }
+      }
+    );
+
 
     this.ownsItem = true;
     // get the first element in the array
@@ -102,12 +133,46 @@ export class MyItemComponent implements OnInit {
     });
   }
 
+  async onReceiveItemClick() {
+    const html = `
+      <div style="text-align: left;">
+        <p>
+          Just like Amazon’s driver knocking up at your door, your item is here!
+          You’re one click away from signing for the delivery and finalizing the process.
+        </p>
+      </div>
+    `
+
+    await this.alertService.fire(
+      'info',
+      'Your Package Has Arrived',
+      undefined,
+      {
+        html,
+        confirmButtonText: 'Confirm Delivery',
+        confirmButtonColor: '#4da6ff',
+        customClass: { confirmButton: 'main-btn' }
+      }
+    );
+  }
+
   async receiveItem() { // this completes the provenance of the item, gives the msg.value to the provenance contract owner
     // get provenance contract
     if (this.state == 2) {
-      alert('Item already received');
+      await this.alertService.fire(
+        'info',
+        'Item already received',
+        'Cannot receive an item that has being already received.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff4d4d',
+          customClass: { confirmButton: 'main-btn swal-warning' }
+        }
+      );
       return;
     }
+
+    await this.onReceiveItemClick();
     const provenance = this.supplyChainService.provenanceContract;
     const productId = ethers.utils.solidityPack(
       [
@@ -144,9 +209,29 @@ export class MyItemComponent implements OnInit {
 
       this.state = 2;
       console.log('Successfully received item');
+      await this.alertService.fire(
+        'success',
+        'Item Received',
+        'You have successfully received your item. Thank you for using our service!',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
     } catch (err) {
       console.error(err);
-      alert('Error receiving item');
+      await this.alertService.fire(
+        'error',
+        'Transaction Failed',
+        'The transaction did not complete successfully. Please try again.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff4d4d',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
+      throw err;
     }
   }
 

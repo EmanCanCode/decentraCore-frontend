@@ -56,6 +56,18 @@ export class MyPropertyComponent implements OnInit {
   smallSliderPost: string[] = [];
 
   async ngOnInit() {
+    /*
+    theres only 4 possible states of lifecycle:
+    - 'ownsProperty' | 'inEscrow' | 'inFinanceContract' | 'noProperty'
+    */
+   // Get the state of the user's real estate life cycle
+   this.lifecycle = await this.web3Service.userRealEstateLifeCycle();
+   // if the lifecycle state is 'noProperty', we can early return
+   if (this.lifecycle.state === 'noProperty') {
+     console.log('No property found');
+     return;
+
+    }
     await this.alertService.notifyFirstVisit(
       'realEstate:my-property',
       'Welcome to your property page!',
@@ -72,17 +84,6 @@ export class MyPropertyComponent implements OnInit {
         }
       }
     );
-    /*
-      theres only 4 possible states of lifecycle:
-      - 'ownsProperty' | 'inEscrow' | 'inFinanceContract' | 'noProperty'
-    */
-    // Get the state of the user's real estate life cycle
-    this.lifecycle = await this.web3Service.userRealEstateLifeCycle();
-    // if the lifecycle state is 'noProperty', we can early return
-    if (this.lifecycle.state === 'noProperty') {
-      console.log('No property found');
-      return;
-    }
     // by this point we know the user at least is in escrow or owns a property, so we can set the other state variables
     this.propertyId = this.lifecycle.propertyId ?? null;  // web3service always returns a propertyId if the lifecycle state is not 'noProperty'
     if (!this.propertyId) {

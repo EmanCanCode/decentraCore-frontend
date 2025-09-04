@@ -195,37 +195,52 @@ export class Web3Service {
 
   async userRealEstateLifeCycle(): Promise<UserRealEstateLifeCycle> {
     console.log("getting user real estate life cycle state...");
+    // initialize as if the user has no property, this is the default state (safe)
     let userRealEstateLifeCycleState: UserRealEstateLifeCycle = { state: 'noProperty' };
+
+    // get contract and signer address
     const contract = await this.getRealEstateContract();
     const signerAddress = await this.signer.getAddress();
+
+    // guard clauses with early "returns"
     if (!contract) {
       console.log('No contract found');
       throw new Error('No contract found');
-    } else if (!signerAddress) {
+    }
+
+    if (!signerAddress) {
       console.log('No signer address found');
       throw new Error('No signer address found');
     }
 
     // Check ERC-1155 ownership
     let ownsProperty = false;
+    // loop through properties 1-9 and check if the user owns any
+    // there is a possibility that the user owns multiple properties, so we will return the first one found... who cares. they should only own one anyways.
     for (let i = 1; i <= 9; i++) {
+      // template was built in node 16 so i cant use typechain the way i want to so i am type casting the balanceOf function to ethers.BigNumber, since the contracts do not have a typechain generated file (basic ERC-1155 eww....)
       const balance: ethers.BigNumber = await contract.balanceOf(signerAddress, i);
+      // if they have a balance > 0, they own the property
       if (balance.gt(0)) {
+        // set flag to true and set userRealEstateLifeCycleState
         ownsProperty = true;
         console.log('Owns property:', i);
         userRealEstateLifeCycleState = {
           state: 'ownsProperty',
           propertyId: i
         };
+
+        // break the loop since we only care about the first property they own
         break;
       }
     }
 
+    // return userRealEstateLifeCycleState if the user owns a property
     if (ownsProperty) {
       return userRealEstateLifeCycleState;
     }
 
-    // Check if in escrow by awaiting the ajax call
+    // Check if in escrow by awaiting the ajax call (i hate this template, but it is what it is... i would obv use the angular http client module not this jQuery ajax call bullcrap.)
     let inEscrow = false;
     try {
       const { propertyId, escrowAddress } = await this.checkEscrow(signerAddress);
@@ -441,10 +456,13 @@ export class Web3Service {
   }
 
   get realEstateFinanceContract() {
+    if (!this.signer) {
+      this.signer = this.getSigner();
+    }
     return new ethers.Contract(
       environment.realEstateContracts.mortgageFinance,
       realEstateFinanceContractBuild.abi,
-      this.signer!
+      this.signer
     );
   }
 }

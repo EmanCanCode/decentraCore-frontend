@@ -63,15 +63,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   skills = [
-    { img: 'assets/img/skills/solidity.png', title: 'Solidity', yearsOfExp: '6' },
-    { img: 'assets/img/skills/Hardhat.png', title: 'Hardhat', yearsOfExp: '5' },
+    { img: 'assets/img/skills/solidity.png', title: 'Solidity', yearsOfExp: '5' },
+    { img: 'assets/img/skills/Hardhat.png', title: 'Hardhat', yearsOfExp: '4' },
     { img: 'assets/img/skills/STARKs-vs-SNARKs.jpg', title: 'Zero Knowledge', yearsOfExp: '2' },
-    { img: 'assets/img/skills/nodejs.png', title: 'Node.js', yearsOfExp: '5' },
-    { img: 'assets/img/skills/typescript.png', title: 'TypeScript', yearsOfExp: '5' },
-    { img: 'assets/img/skills/ExpressJS.png', title: 'Express.js', yearsOfExp: '5' },
-    { img: 'assets/img/skills/RESTapi.png', title: 'REST APIs', yearsOfExp: '5' },
-    { img: 'assets/img/skills/angular.webp', title: 'Angular', yearsOfExp: '5' },
-    { img: 'assets/img/skills/ionic.webp', title: 'Ionic', yearsOfExp: '5' },
+    { img: 'assets/img/skills/nodejs.png', title: 'Node.js', yearsOfExp: '4' },
+    { img: 'assets/img/skills/typescript.png', title: 'TypeScript', yearsOfExp: '4' },
+    { img: 'assets/img/skills/ExpressJS.png', title: 'Express.js', yearsOfExp: '4' },
+    { img: 'assets/img/skills/RESTapi.png', title: 'REST APIs', yearsOfExp: '4' },
+    { img: 'assets/img/skills/angular.webp', title: 'Angular', yearsOfExp: '4' },
+    { img: 'assets/img/skills/ionic.webp', title: 'Ionic', yearsOfExp: '4' },
     { img: 'assets/img/skills/mongodb.png', title: 'MongoDB', yearsOfExp: '3' },
     { img: 'assets/img/skills/docker.png', title: 'Docker', yearsOfExp: '2' },
     { img: 'assets/img/skills/kubernetes.jpg', title: 'Kubernetes', yearsOfExp: '2' },
@@ -84,21 +84,21 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       img: 'assets/img/latest-projects/finance.webp',
       icon: 'fas fa-chart-line',
       title: 'Finance',
-      text: 'Full-stack blockchain dApp demo of Market Makers (Constant Product, Constant Sum & Order Book) that simulate secure, transparent financial systems and mirror real-world digital asset management.',
+      text: 'Full-stack blockchain dApp demo of Market Makers (Constant Product & Constant Sum) that simulate secure, transparent financial systems and mirror real-world digital asset management.',
       href: 'finance/cpamm'
     },
     {
       img: 'assets/img/latest-projects/realEstate.webp',
       icon: 'fas fa-building',
       title: 'Real Estate',
-      text: 'Full-stack blockchain dApp demo featuring NFT-based escrow contracts that replicate the real-world process of purchasing property, ensuring trust and transparency in real estate transactions.',
+      text: 'Full-stack blockchain dApp demo, mimicking Zillow, featuring NFT-based escrow contracts that replicate the real-world process of purchasing property, ensuring trust and transparency in real estate transactions.',
       href: 'realEstate/shop'
     },
     {
       img: 'assets/img/latest-projects/supplyChain.jpg',
       icon: 'fas fa-truck',
       title: 'Supply Chain',
-      text: 'Full-stack blockchain dApp demo integrating product provenance, inventory management, and automated process contracts to drive efficiency, security and traceability across global supply networks.',
+      text: 'Full-stack blockchain dApp demo (just like Amazon)integrating product provenance, inventory management, and automated process contracts to drive efficiency, security and traceability across global supply networks.',
       href: 'supplyChain/shop'
     },
   ];
@@ -187,6 +187,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         html,
         confirmButtonText: 'Got it!',
         confirmButtonColor: '#4da6ff',
+        background: '#353530',
+        color: '#fff',
         customClass: {
           confirmButton: 'main-btn swal2-confirm',
         }

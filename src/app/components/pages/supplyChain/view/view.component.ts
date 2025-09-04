@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ethers } from 'ethers';
 import { Item } from 'src/app/interfaces/interfaces';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { SupplyChainService } from 'src/app/services/supplyChain/supply-chain.service';
 
 @Component({
@@ -77,6 +78,7 @@ export class ViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private supplyChainService: SupplyChainService,
+    private alertService: AlertService
   ) { }
 
   async ngOnInit() {
@@ -89,6 +91,33 @@ export class ViewComponent implements OnInit {
     ) {
       this.router.navigate(['404']);
     }
+
+    await this.alertService.notifyFirstVisit(
+      'supplyChain:view',
+      'Explore Item Details',
+      `
+        <div style="text-align: left;">
+          <p>
+            On this page, you can inspect every detail of a single inventory item—
+            its name, description, current quantity. After you buy an item, full location history
+            all recorded on-chain via Provenance.
+          </p><br>
+          <p>
+            <strong>Devs & Recruiters:</strong> Provenance.sol emits
+            <code>CreatedRecord</code> & <code>UpdatedRecord</code> events, and
+            InventoryManagement.sol emits <code>StockUpdated</code> &
+            <code>ItemTransferred</code>. WebSocket listeners catch those events,
+            push them through our Node/Express→MongoDB pipeline, and the Angular UI
+            updates instantly—just like Amazon’s real-time item-tracking system.
+          </p>
+        </div>
+      `.trim(),
+      {
+        confirmButtonText: 'Got it!',
+        confirmButtonColor: '#4da6ff',
+        customClass: { confirmButton: 'main-btn' }
+      }
+    );
 
     const inventoryManagement = this.supplyChainService.inventoryManagementContract;
     this.item = await inventoryManagement.items(this.itemId);
@@ -123,6 +152,32 @@ export class ViewComponent implements OnInit {
     return decoder.decode(bytes);
   }
 
+  async onBuyItemClick() {
+    const html = `
+      <div style="text-align: left;">
+        <p>
+          You're about to purchase <strong>${this.item.name}</strong> for <strong>${this.price} ETH</strong>. After confirmation, you will be able to track the item’s provenance (Ordered → Shipped → Delivered) on the <a href="/supplyChain/myItem">My Item</a> page.
+        </p><br>
+        <p>
+          <strong>Devs & Recruiters:</strong> Whenever the item's quantity goes below it's threshold (set on chain), we have the <code>AutomatedProcess</code> contract that will handle restocking items & managing funds between the you and the seller, like an escrow.
+        </p><br>
+        <p><strong>Note:</strong> This runs on a local Hardhat network I reset periodically—if your assets disappear, that’s why. In that case, be sure to clear the Activity Tab setting in MetaMask. </p>
+      </div>
+    `.trim();
+
+    await this.alertService.fire(
+      'info',
+      'About to Swap',
+      undefined,
+      {
+        html,
+        confirmButtonText: 'OK, swap',
+        confirmButtonColor: '#4da6ff',
+        customClass: { confirmButton: 'main-btn' }
+      }
+    );
+  }
+
   async buyItem() {
     if (!this.isInStock) {
       return alert('Out of stock');
@@ -132,6 +187,8 @@ export class ViewComponent implements OnInit {
       return alert('Invalid price');
     }
 
+
+    await this.onBuyItemClick();
     // assign timestamp to the respective product record
     const timestamp = Math.floor(Date.now() / 1000);
     let record = this.productRecords[this.itemId - 1];
@@ -164,15 +221,45 @@ export class ViewComponent implements OnInit {
 
       const receipt = await tx.wait();
       if (!receipt.status) {
+        await this.alertService.fire(
+          'error',
+          'Transaction Failed',
+          'The transaction did not complete successfully. Please try again.',
+          {
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff4d4d',
+            customClass: { confirmButton: 'main-btn' }
+          }
+        );
         throw new Error('Transaction failed');
       }
       this.isFirstTimeBuyer = false;
       console.log('Successfully purchased item / created record with provenance');
       console.log('Transaction receipt:', receipt);
+      await this.alertService.fire(
+        'success',
+        'Transaction Successful',
+        'You have successfully purchased the item and created a record.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
       this.router.navigate(['supplyChain/myItem']);
     } catch (err) {
       console.error(err);
-      alert('Transaction failed');
+      await this.alertService.fire(
+        'error',
+        'Transaction Failed',
+        'There was an error processing your transaction. Please try again.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff4d4d',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
+      throw err; // rethrow the error to handle it in the calling function if needed
     }
   }
 }
