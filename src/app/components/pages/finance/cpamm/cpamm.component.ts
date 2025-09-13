@@ -75,6 +75,7 @@ export class CpammComponent implements OnInit {
 
     // Set reserves by converting from BigNumber (wei) to ether string (4 decimals)
     const _reserves = await this.financeService.getReserves('Constant Product');
+    console.log('_reserves:', _reserves);
     this.reserves = {
       emanToken1: this.parseToEther(_reserves.emanToken1),
       emanToken2: this.parseToEther(_reserves.emanToken2)
@@ -411,7 +412,7 @@ export class CpammComponent implements OnInit {
     const balances = await this.financeService.getUserTokenBalances();
     if (
       formattedAmounts.amount1.gt(balances.emanToken1) ||
-        formattedAmounts.amount2.gt(balances.emanToken2)
+      formattedAmounts.amount2.gt(balances.emanToken2)
     ) {
       this.alertService.fire(
         'error',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import $ from 'jquery';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { Web3Service } from 'src/app/services/web3/web3.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { Web3Service } from 'src/app/services/web3/web3.service';
 })
 export class MobilemenuComponent implements OnInit {
 
-  constructor(private web3: Web3Service) { }
+  constructor(private web3: Web3Service, private alert: AlertService) { }
 
   ngOnInit(): void {
     function mobilemenu() {
@@ -43,7 +44,16 @@ export class MobilemenuComponent implements OnInit {
       if (!this.web3.isWalletConnected()) await this.web3.connect();
     } catch (error) {
       console.error("Error connecting to wallet:", error);
-      alert("Error connecting to wallet");
+      await this.alert.fire(
+        'error',
+        'Connection Error',
+        'There was an error connecting to your wallet. Please try again.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      )
     }
   }
 }

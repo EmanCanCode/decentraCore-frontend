@@ -64,3 +64,17 @@ input[type="number"] {
   color: #2ecc71; /* a solid green */
   /* font-weight: bold; */
 }
+
+
+/* Disabled state for your buttons */
+.main-btn.btn-filled:disabled,
+.main-btn.btn-filled[disabled],
+.main-btn.btn-filled[aria-disabled="true"],
+.main-btn.btn-filled.is-disabled {
+  background-color: #b3d9ff; /* lighter version of #4da6ff */
+  color: #666;               /* muted text */
+  cursor: not-allowed;
+  opacity: 0.65;
+  box-shadow: none;
+  pointer-events: none;      /* belt-and-suspenders */
+}

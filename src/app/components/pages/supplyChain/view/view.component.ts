@@ -180,11 +180,41 @@ export class ViewComponent implements OnInit {
 
   async buyItem() {
     if (!this.isInStock) {
-      return alert('Out of stock');
+      await this.alertService.fire(
+        'error',
+        'Out of Stock',
+        'This item is currently out of stock. Please check back later or contact support for more information.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff4d4d',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
+      return;
     } else if (!await this.supplyChainService.isFirstTimeBuyer()) {
-      return alert('You have already purchased a product');
+      await this.alertService.fire(
+        'info',
+        'Welcome Back!',
+        'Unfortunately, you can only buy one item for this demo. Feel free to explore the other pages!',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
+      return;
+
     } else if (!this.price) {
-      return alert('Invalid price');
+      return this.alertService.fire(
+        'error',
+        'Price Not Found',
+        'The price for this item could not be found. Please try again later or contact support.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff4d4d',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
     }
 
 

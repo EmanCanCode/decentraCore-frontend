@@ -23,7 +23,7 @@ export class AlertService {
   constructor(
     private web3Service: Web3Service,
     private financeService: FinanceService
-  ) {}
+  ) { }
 
   /**
    * Only shows once per session

@@ -105,8 +105,6 @@ export class ViewComponent implements OnInit {
           ...this.metadata.otherImages
         ];
 
-        // get faucet
-        await this.web3Service.requestFaucet();
 
         // determine if user is first time buyer
         const lifecycle = await this.web3Service.userRealEstateLifeCycle();
@@ -411,14 +409,14 @@ export class ViewComponent implements OnInit {
       console.error('Failed to create escrow:', err);
       this.alertService.fire(
         'error',
-          'Failed to Create Escrow',
-          'There was an error creating the escrow. Please try again or contact support.',
-          {
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#4da6ff',
-            customClass: { confirmButton: 'main-btn' }
-          }
-        );
+        'Failed to Create Escrow',
+        'There was an error creating the escrow. Please try again or contact support.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
     }
   }
 

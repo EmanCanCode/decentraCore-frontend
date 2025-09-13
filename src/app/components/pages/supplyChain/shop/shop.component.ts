@@ -15,24 +15,24 @@ export class SupplyChainShopComponent implements OnInit {
 
   shopGridPost = [
     {
-      img:'assets/img/supplyChain/bearings.webp',
-      title:'',
-      tag:'Sale',
-      price:'0.01',
+      img: 'assets/img/supplyChain/bearings.webp',
+      title: '',
+      tag: 'Sale',
+      price: '0.01',
       link: '../../supplyChain/view/1'
     },
     {
-      img:'assets/img/supplyChain/wafer.webp',
-      title:'',
-      tag:'New',
-      price:'0.02',
+      img: 'assets/img/supplyChain/wafer.webp',
+      title: '',
+      tag: 'New',
+      price: '0.02',
       link: '../../supplyChain/view/2'
     },
     {
-      img:'assets/img/supplyChain/pellets.webp',
-      title:'',
-      tag:'New',
-      price:'0.03',
+      img: 'assets/img/supplyChain/pellets.webp',
+      title: '',
+      tag: 'New',
+      price: '0.03',
       link: '../../supplyChain/view/3'
     },
   ];

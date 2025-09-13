@@ -107,8 +107,6 @@ export class AnalyticsComponent implements OnInit {
       );
       // Handle errors here
       console.error('Error fetching analytics data:', textStatus, errorThrown);
-      // You can show an error message to the user or take other actions
-      // alert('Failed to fetch analytics data. Please try again later.');
     });
   }
 

@@ -10,7 +10,7 @@ export class TokenGuard implements CanActivate {
 
   constructor(
     private financeService: FinanceService,
-  ) {}
+  ) { }
 
   async canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,7 +25,6 @@ export class TokenGuard implements CanActivate {
     //   await this.financeService.addTokensToWallet();
     // } catch (error) {
     //   console.error('Failed to add tokens to wallet:', error);
-    //   alert('Failed to add tokens to wallet. Please refresh page.');
     //   return false;
     // }
     return true;

@@ -60,12 +60,12 @@ export class MyPropertyComponent implements OnInit {
     theres only 4 possible states of lifecycle:
     - 'ownsProperty' | 'inEscrow' | 'inFinanceContract' | 'noProperty'
     */
-   // Get the state of the user's real estate life cycle
-   this.lifecycle = await this.web3Service.userRealEstateLifeCycle();
-   // if the lifecycle state is 'noProperty', we can early return
-   if (this.lifecycle.state === 'noProperty') {
-     console.log('No property found');
-     return;
+    // Get the state of the user's real estate life cycle
+    this.lifecycle = await this.web3Service.userRealEstateLifeCycle();
+    // if the lifecycle state is 'noProperty', we can early return
+    if (this.lifecycle.state === 'noProperty') {
+      console.log('No property found');
+      return;
 
     }
     await this.alertService.notifyFirstVisit(
@@ -327,18 +327,18 @@ export class MyPropertyComponent implements OnInit {
   async onPayOffClick() {
     // Calculate amounts using ethers.js
     const purchasePriceBN = ethers.utils.parseEther(this.price.toString());
-    const earnestBN       = purchasePriceBN.div(100);
-    const remainingBN     = purchasePriceBN.sub(earnestBN);
-    const earnestEth      = ethers.utils.formatEther(earnestBN);
-    const remainingEth    = ethers.utils.formatEther(remainingBN);
+    const earnestBN = purchasePriceBN.div(100);
+    const remainingBN = purchasePriceBN.sub(earnestBN);
+    const earnestEth = ethers.utils.formatEther(earnestBN);
+    const remainingEth = ethers.utils.formatEther(remainingBN);
 
     // Shorten addresses for display
-    const lenderFull  = await this.web3Service
+    const lenderFull = await this.web3Service
       .getEscrowContract(this.lifecycle!.escrowAddress)
       .lender();
     const lenderShort = `${lenderFull.slice(0, 6)}…${lenderFull.slice(-4)}`;
-    const buyerFull   = await this.web3Service.getSigner().getAddress();
-    const buyerShort  = `${buyerFull.slice(0, 6)}…${buyerFull.slice(-4)}`;
+    const buyerFull = await this.web3Service.getSigner().getAddress();
+    const buyerShort = `${buyerFull.slice(0, 6)}…${buyerFull.slice(-4)}`;
 
     // Build the alert HTML
     const html = `

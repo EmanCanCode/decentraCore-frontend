@@ -135,7 +135,7 @@ export class Web3Service {
 
     window.ethereum.on('chainChanged', async (chainId: string) => {
       console.log('Chain changed to:', chainId);
-      await this.addAndSwitchChain().catch(() => {
+      await this.addAndSwitchChain().catch(async () => {
         // we need to alert them to switch to the correct network, send them to homepage
         alert('Please switch to the correct network');
         this.router.navigate(['/']);

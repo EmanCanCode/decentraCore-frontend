@@ -15,12 +15,12 @@
                   <label style="color: #fff">Eman Token 1:</label>
                   <label class="pb-15 pl-25">{{
                     userBalances.emanToken1
-                  }}</label>
+                    }}</label>
                   <br />
                   <label style="color: #fff">Eman Token 2:</label>
                   <label class="pb-15 pl-25">{{
                     userBalances.emanToken2
-                  }}</label>
+                    }}</label>
                   <br />
                   <button type="submit" class="main-btn btn-filled mt-4" (click)="refresh('balances')">
                     Refresh
@@ -49,37 +49,22 @@
                   </div>
                   {{ token.title }}
                   <br />
-                  <span
-                    [ngClass]="{
+                  <span [ngClass]="{
                       'give-label': i === 0,
                       'get-label': i === 1
-                    }"
-                    class="text-sm-right w-100"
-                  >
+                    }" class="text-sm-right w-100">
                     You {{ i == 0 ? 'give' : 'get' }}
                   </span>
                 </td>
-                <td
-                  class="quantity shop-detail-content cw-qty-sec cw-align has-title justify-content-center"
-                  data-title="Qty"
-                >
+                <td class="quantity shop-detail-content cw-qty-sec cw-align has-title justify-content-center"
+                  data-title="Qty">
                   <div class="quantity-box">
-                    <input
-                      style="width: 100%;"
-                      type="number"
-                      class="input-qty"
-                      name="name"
-                      value="{{ token.qty }}"
-                      (change)="onChangeSwapInputValue(token.title, $event)"
-                    />
+                    <input style="width: 100%;" type="number" class="input-qty" name="name" value="{{ token.qty }}"
+                      (change)="onChangeSwapInputValue(token.title, $event)" />
                   </div>
                 </td>
                 <td data-title="Import">
-                  <button
-                    type="button"
-                    class="main-btn btn-filled"
-                    (click)="import()"
-                  >
+                  <button type="button" class="main-btn btn-filled" (click)="import()">
                     Import
                   </button>
                 </td>
@@ -88,16 +73,12 @@
             <tfoot>
               <tr>
                 <td colspan="4">
-                  <button
-                    class="main-btn btn-filled float-left"
-                    (click)="changeOrder()"
-                  >
+                  <button class="main-btn btn-filled float-left" (click)="changeOrder()">
                     Change Order
                   </button>
-                  <button
-                    class="main-btn btn-filled float-right"
-                    (click)="swap()"
-                  >
+                  <button class="main-btn btn-filled float-right" [disabled]="!minSwapAmountReached"
+                    [attr.aria-disabled]="!minSwapAmountReached"
+                    [style.background-color]="minSwapAmountReached ? '#4da6ff' : '#b3d9ff'" (click)="swap()">
                     Swap
                   </button>
                 </td>
@@ -141,32 +122,14 @@
               <form (submit)="onSubmitAddLiquidity($event)">
                 <div class="form-group mb-0">
                   <label for="et1AddLiq">Enter amount of Eman Token 1</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Amount of Eman Token 1"
-                    id="et1AddLiq"
-                    name="et1AddLiq"
-                    [(ngModel)]="amountToken1"
-                    (change)="updateAddLiquidityValues('token1')"
-                  />
+                  <input type="text" class="form-control" placeholder="Amount of Eman Token 1" id="et1AddLiq"
+                    name="et1AddLiq" [(ngModel)]="amountToken1" (change)="updateAddLiquidityValues('token1')" />
                   <label for="et2AddLiq" class="mt-25">
                     Enter amount of Eman Token 2
                   </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Amount of Eman Token 2"
-                    id="et2AddLiq"
-                    name="et2AddLiq"
-                    [(ngModel)]="amountToken2"
-                    (change)="updateAddLiquidityValues('token2')"
-                  />
-                  <button
-                    type="submit"
-                    class="main-btn btn-filled mt-4"
-                    (click)="onSubmitAddLiquidity($event)"
-                  >
+                  <input type="text" class="form-control" placeholder="Amount of Eman Token 2" id="et2AddLiq"
+                    name="et2AddLiq" [(ngModel)]="amountToken2" (change)="updateAddLiquidityValues('token2')" />
+                  <button type="submit" class="main-btn btn-filled mt-4" (click)="onSubmitAddLiquidity($event)">
                     Add
                   </button>
                 </div>
@@ -182,17 +145,9 @@
               </div>
               <form>
                 <div class="form-group mb-0">
-                  <label for="removeLiqBtn"
-                    >Enter amount of Liquidity Pool Tokens to return</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter amount of LPTS (shares) to return"
-                    id="removeLiqBtn"
-                    name="removeLiqBtn"
-                    [(ngModel)]="amountLPTsToReturn"
-                  />
+                  <label for="removeLiqBtn">Enter amount of Liquidity Pool Tokens to return</label>
+                  <input type="text" class="form-control" placeholder="Enter amount of LPTS (shares) to return"
+                    id="removeLiqBtn" name="removeLiqBtn" [(ngModel)]="amountLPTsToReturn" />
                   <button type="submit" class="main-btn btn-filled mt-4" (click)="removeLiquidity()">
                     Remove
                   </button>

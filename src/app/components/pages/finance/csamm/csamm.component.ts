@@ -23,7 +23,7 @@ export class CsammComponent implements OnInit {
     emanToken1: '0',
     emanToken2: '0'
   };
-
+  minSwapAmountReached = false; // Flag for minimum swap amount, disabled the swap button if false
   csamm: ethers.Contract; // CSAMM contract instance
 
   // For the Add Liquidity form (values entered in ether)
@@ -108,13 +108,16 @@ export class CsammComponent implements OnInit {
       );
       console.warn('New value is below minimum swap amount');
 
-      // Reset the changed token's quantity to 0
-      const changedIndex = this.tokenList.findIndex(t => t.title === changedToken);
-      this.tokenList[changedIndex].qty = 0;
+      this.minSwapAmountReached = false; // Disable the swap button
+      // Reset both quantities to 0
+      this.tokenList.forEach(token => {
+        token.qty = 0;
+      })
       console.log(`Reset ${changedToken} quantity to 0 due to minimum amount requirement`);
       return;
     }
 
+    this.minSwapAmountReached = true; // Enable the swap button
     let tokenContract: ethers.Contract;
     let amountOut: ethers.BigNumber;
 
@@ -219,6 +222,23 @@ export class CsammComponent implements OnInit {
   }
 
   async swap() {
+    // only can fire if the minimum swap amount is reached
+    if (!this.minSwapAmountReached) {
+      await this.alertService.fire(
+        'warning',
+        'Minimum Swap Amount',
+        'The minimum amount for a swap is 15,000 tokens.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ffcc00',
+          customClass: { confirmButton: 'main-btn swal-warning' }
+        }
+      );
+      console.warn('Swap attempted below minimum amount');
+      return;
+    }
+
+
     // alert the user that they are about to swap
     await this.onSwapClick(this.tokenList[0].title, this.tokenList[0].qty.toString());
 
@@ -294,6 +314,9 @@ export class CsammComponent implements OnInit {
       this.tokenList.forEach(token => {
         token.qty = 0; // Reset the quantities after swap
       });
+
+      this.minSwapAmountReached = false; // Disable the swap button until new valid input
+      console.log('Token quantities reset after swap');
     } catch (error) {
       console.error('Error in swap:', error);
       await this.alertService.fire(

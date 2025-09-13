@@ -1,58 +1,50 @@
+// src/app/shared/prism.directive.ts
 import {
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges
+  Directive, ElementRef, Input, OnChanges, SimpleChanges, AfterViewInit, NgZone
 } from '@angular/core';
-import * as Prism from 'prismjs';
-import loadLanguages from 'prismjs/components/index.js';
-// statically import the languages you’ll highlight:
-import 'prismjs/components/prism-core';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-markup';      // HTML/XML
-import 'prismjs/components/prism-javascript'; // JS base for TS
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-solidity';
+import Prism from 'src/app/prism-setup';
 
-@Directive({
-  selector: '[appPrism]',
-})
-export class PrismDirective implements OnChanges {
+@Directive({ selector: '[appPrism]' })
+export class PrismDirective implements OnChanges, AfterViewInit {
   @Input('prism') code = '';
   @Input() language = 'typescript';
 
-  private loaded = new Set<string>();
+  private viewReady = false;
 
-  constructor(private el: ElementRef<HTMLElement>) {}
+  constructor(private el: ElementRef<HTMLElement>, private zone: NgZone) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['code'] || changes['language']) {
-      this.highlight();
+  ngAfterViewInit(): void {
+    this.viewReady = true;
+    this.zone.runOutsideAngular(() => queueMicrotask(() => this.highlight()));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.viewReady && (changes['code'] || changes['language'])) {
+      this.zone.runOutsideAngular(() => this.highlight());
     }
   }
 
-  private async highlight() {
-    const lang = this.language.trim().toLowerCase();
+  private highlight(): void {
+    const lang = (this.language || '').trim().toLowerCase();
+    const codeEl = this.el.nativeElement;
 
-    // if we haven’t loaded this language yet, do so:
-    if (!this.loaded.has(lang)) {
-      try {
-        loadLanguages([lang]);
-        this.loaded.add(lang);
-      } catch (err) {
-        console.error(err);
-        console.warn(`Prism: no syntax for "${lang}", falling back to plain text`);
-      }
+    // If already tokenized (Prism added spans), don’t wipe it
+    const alreadyTokenized = codeEl.querySelector('.token') !== null;
+
+    if (!alreadyTokenized) {
+      // Only set text if we have an input string; avoids clobbering inner HTML
+      if (this.code != null) codeEl.textContent = (this.code ?? '').trim();
     }
 
-    // set up the element
-    const pre = this.el.nativeElement;
-    pre.textContent = this.code.trim();
-    pre.className = `language-${lang}`;
+    // ensure language-* on both <code> and <pre>
+    Array.from(codeEl.classList).forEach(c => c.startsWith('language-') && codeEl.classList.remove(c));
+    codeEl.classList.add(`language-${lang}`);
+    const pre = codeEl.closest('pre');
+    if (pre) {
+      Array.from(pre.classList).forEach(c => c.startsWith('language-') && pre.classList.remove(c));
+      pre.classList.add(`language-${lang}`);
+    }
 
-    // actually highlight
-    Prism.highlightElement(pre);
+    (Prism as any)?.highlightElement?.(codeEl);
   }
 }

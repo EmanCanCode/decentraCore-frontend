@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import $ from 'jquery';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -14,12 +15,12 @@ export class ContactComponent implements OnInit {
   phone: string = "";
   subject: string = "";
   message: string = "";
-  constructor() { }
+  constructor(private alert: AlertService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 
-  submitContact() {
+  async submitContact() {
     if (
       !this.name ||
       !this.email ||
@@ -28,15 +29,33 @@ export class ContactComponent implements OnInit {
       !this.message
     ) {
       console.log("Missing data to submit contact form");
-      alert("Enter valid data to submit contact form");
+      await this.alert.fire(
+        'error',
+        'Error',
+        'Please fill in all fields before submitting the contact form.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
       return;
     }
 
-      // Basic email format check
+    // Basic email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.email)) {
       console.log("Invalid email format");
-      alert("Enter valid email to submit contact form");
+      await this.alert.fire(
+        'error',
+        'Error',
+        'Please enter a valid email address to submit the contact form.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
       return;
     }
 
@@ -44,7 +63,16 @@ export class ContactComponent implements OnInit {
     const phoneRegex = /^[\d+\-\s]{7,20}$/;
     if (!phoneRegex.test(this.phone)) {
       console.log("Invalid phone number format");
-      alert("Enter valid phone number to submit contact form");
+      await this.alert.fire(
+        'error',
+        'Error',
+        'Please enter a valid phone number to submit the contact form.',
+        {
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#4da6ff',
+          customClass: { confirmButton: 'main-btn' }
+        }
+      );
       return;
     }
 
@@ -60,7 +88,17 @@ export class ContactComponent implements OnInit {
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      success: () => {
+      success: async () => {
+        await this.alert.fire(
+          'success',
+          'Success',
+          'Thank you for contacting me! I will get back to you shortly.',
+          {
+            confirmButtonText: 'Got it!',
+            confirmButtonColor: '#4da6ff',
+            customClass: { confirmButton: 'main-btn' }
+          }
+        );
         console.log("Successfully submitted contact form");
         this.name = ""; // Clear the name input field
         this.email = ""; // Clear the email input field
@@ -68,9 +106,18 @@ export class ContactComponent implements OnInit {
         this.subject = ""; // Clear the subject input field
         this.message = ""; // Clear the message input field
       },
-      error: () => {
+      error: async () => {
         console.log("Error submitting contact form");
-        alert('Error submitting contact form');
+        await this.alert.fire(
+          'error',
+          'Error',
+          'There was an error submitting the contact form. Please try again later.',
+          {
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#4da6ff',
+            customClass: { confirmButton: 'main-btn' }
+          }
+        );
       }
     });
   }

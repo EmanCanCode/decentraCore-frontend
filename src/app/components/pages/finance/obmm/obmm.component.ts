@@ -22,37 +22,37 @@ export class ObmmComponent implements OnInit {
     pair: string;
     amount: string;
   }[] = [
-    {
-      time: "03/06/2025, 10:20:15 AM",
-      token: "ETH",
-      pair: "ETH/EMAN1",
-      amount: "1.2345"
-    },
-    {
-      time: "03/06/2025, 10:25:42 AM",
-      token: "EMAN1",
-      pair: "ETH/EMAN1",
-      amount: "0.5678"
-    },
-    {
-      time: "03/06/2025, 10:30:00 AM",
-      token: "ETH",
-      pair: "ETH/EMAN2",
-      amount: "2.0000"
-    },
-    {
-      time: "03/06/2025, 10:35:30 AM",
-      token: "EMAN2",
-      pair: "ETH/EMAN2",
-      amount: "0.8900"
-    },
-    {
-      time: "03/06/2025, 10:40:00 AM",
-      token: "EMAN1",
-      pair: "EMAN1/EMAN2",
-      amount: "1.1111"
-    }
-  ];
+      {
+        time: "03/06/2025, 10:20:15 AM",
+        token: "ETH",
+        pair: "ETH/EMAN1",
+        amount: "1.2345"
+      },
+      {
+        time: "03/06/2025, 10:25:42 AM",
+        token: "EMAN1",
+        pair: "ETH/EMAN1",
+        amount: "0.5678"
+      },
+      {
+        time: "03/06/2025, 10:30:00 AM",
+        token: "ETH",
+        pair: "ETH/EMAN2",
+        amount: "2.0000"
+      },
+      {
+        time: "03/06/2025, 10:35:30 AM",
+        token: "EMAN2",
+        pair: "ETH/EMAN2",
+        amount: "0.8900"
+      },
+      {
+        time: "03/06/2025, 10:40:00 AM",
+        token: "EMAN1",
+        pair: "EMAN1/EMAN2",
+        amount: "1.1111"
+      }
+    ];
   myOpenOrders: {
     token: string;
     pair: string;
@@ -76,7 +76,7 @@ export class ObmmComponent implements OnInit {
 
   constructor(
     private financeService: FinanceService,
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.obmm = this.financeService.orderBookContract;
@@ -521,7 +521,7 @@ export class ObmmComponent implements OnInit {
           const orderPriority = { "ETH": 1, "EMAN1": 2, "EMAN2": 3 };
           let canonicalPair: string;
           if (tokenGetSymbol !== tokenGiveSymbol &&
-              orderPriority[tokenGetSymbol] && orderPriority[tokenGiveSymbol]) {
+            orderPriority[tokenGetSymbol] && orderPriority[tokenGiveSymbol]) {
             if (orderPriority[tokenGetSymbol] < orderPriority[tokenGiveSymbol]) {
               canonicalPair = `${tokenGetSymbol}/${tokenGiveSymbol}`;
             } else {
