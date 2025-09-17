@@ -42,7 +42,6 @@ app/
 │   └── assets/           # Static assets (icons, images, metadata)
 ```
 
-> **Note**: If you encounter any extracted folders named `api/`, this is a typo and should be read as `app/`.
 
 ---
 
