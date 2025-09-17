@@ -35,6 +35,8 @@ export class ShopleftComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    console.log(`${environment.seederAddresses.seeder1} is seeder1`);
+
     await this.getPropertyList();
     await this.alertService.notifyFirstVisit(
       'realEstate:shop',
